@@ -1,8 +1,16 @@
 <?php
 
-namespace PT_Setup;
+namespace Main;
 
-use PT_Shortcodes\Example_Shortcode;
+use Main\Custom\Admin;
+use Main\Custom\Frontend;
+use Main\Custom\Menus\Main_Menu;
+use Main\Custom\Menus\Sub_Menu;
+use Main\Custom\Setup;
+use Main\Custom\Shortcodes\Example_ShortcodeInterface;
+use Main\Framework\Entities\Post_Type;
+use Main\Framework\Loader;
+
 /**
  * Basic Plugin file were everything is loaded. Keep in mind when adding more and more custom post types, shortcodes,
  * dependencies and other hooks that you start seperating each function in its own file.
@@ -19,7 +27,7 @@ use PT_Shortcodes\Example_Shortcode;
  * @action plugin_deactivation
  */
 class Plugin {
-	/** @var  $loader Loader  */
+	/** @var  $loader Loader */
 	protected $loader;
 	protected $plugin_slug;
 	protected $version;
@@ -38,27 +46,25 @@ class Plugin {
 		$this->load_dependencies();
 		$this->define_required_plugins();
 		$this->define_setup_hooks();
-
 		$this->define_admin_hooks();
-
 		$this->define_shortcodes();
-
 		$this->define_global_frontend_hooks();
+		$this->define_custom_post_types();
+		$this->define_menus();
 
-		$this->loader->add_action( "init", $this, "wordpress_init" );
 	}
 
 	/**
-	 * Used to define custom post types. Custom post types need to be added right after WordPress is loaded, not
-	 * when the plugin is loaded.
-	 *
-	 * @hook init - runs when WordPress is first initialized
-	 * @calls define_custom_post_types
+	 * Loads all the required files and vendors.
 	 */
-	public function wordpress_init() {
-		if(Constants::INIT_POST_TYPES) {
-			$this->define_custom_post_types();
-		}
+	private function load_dependencies() {
+		require_once( 'custom/class-admin.php' );
+		require_once( 'custom/class-frontend.php' );
+		require_once( 'custom/class-setup.php' );
+		require_once( 'custom/shortcodes/class-example-shortcode.php' );
+		require_once('custom/menus/class-main-menu.php');
+		require_once('custom/menus/class-sub-menu.php');
+		$this->loader = new Loader();
 	}
 
 	/**
@@ -73,27 +79,11 @@ class Plugin {
 	}
 
 	/**
-	 * Loads all the required files and vendors.
+	 * Define all menus here.
 	 */
-	private function load_dependencies() {
-		require_once( 'class-loader.php' );
-		require_once( 'class-admin.php' );
-		require_once( 'class-frontend.php' );
-		require_once( 'class-setup.php' );
-		require_once( 'shortcodes/class-example-shortcode.php' );
-		$this->loader = new Loader();
-
-	}
-
-	/**
-	 * Define all shortcodes
-	 * @shortcode example_shortcode
-	 *
-	 */
-	private function define_shortcodes() {
-		$exampleShortcode = new Example_Shortcode();
-		add_shortcode( "example_shortcode", array( $exampleShortcode, "shortcode" ) );
-
+	private function define_menus() {
+		$this->loader->add_menu("Template", "Template", "administrator", Constants::PLUGIN_DASHBOARD_MAIN_MENU, new Main_Menu());
+		$this->loader->add_sub_menu(Constants::PLUGIN_DASHBOARD_MAIN_MENU, "Sub Menu", "Sub Menu", "administrator", "template_sub", new Sub_Menu());
 	}
 
 	/**
@@ -104,13 +94,10 @@ class Plugin {
 	 * @actionClass  Admin
 	 */
 	private function define_admin_hooks() {
-		$admin = new Admin( $this->version );
-		if(Constants::INIT_ADMIN_SCRIPT) {
-			$this->loader->add_action( 'admin_enqueue_scripts', $admin, 'enqueue_scripts' );
-		}
-		if(Constants::INIT_ADMIN_MENU) {
-			$this->loader->add_action( "admin_menu", $admin, "register_menus" );
-		}
+		$admin = new Admin( $this->version, $this->plugin_base_file );
+		$this->loader->add_action( 'admin_enqueue_scripts', $admin, 'enqueue_scripts' );
+
+
 	}
 
 	/**
@@ -120,10 +107,9 @@ class Plugin {
 	 * @actionClass Frontend
 	 */
 	private function define_global_frontend_hooks() {
-		$fronend = new Frontend( $this->version );
-		if(Constants::INIT_FRONTEND_SCRIPTS) {
-			$this->loader->add_action( "wp_enqueue_scripts", $fronend, "enqueue_scripts" );
-		}
+		$fronend = new Frontend( $this->version, $this->plugin_base_file );
+		$this->loader->add_action( "wp_enqueue_scripts", $fronend, "enqueue_scripts" );
+
 	}
 
 	/**
@@ -140,8 +126,19 @@ class Plugin {
 	}
 
 	/**
-	 * Define all custom post types, function is executed on the WordPress "init" hook.
+	 * Define all shortcodes
 	 *
+	 * @shortcode example_shortcode
+	 *
+	 */
+	private function define_shortcodes() {
+		$this->loader->add_shortcode( "example_shortcode", new Example_ShortcodeInterface() );
+	}
+
+	/**
+	 * Define all custom post types
+	 *
+	 * @hook init
 	 * @post_type Example
 	 * @post_supports title
 	 * @post_supports revisions
@@ -150,52 +147,13 @@ class Plugin {
 	 * @showui options-page
 	 */
 	private function define_custom_post_types() {
-		$labels = array(
-			'name'               => __( "Examples", Constants::PLUGIN_LANGUAGE_DOMAIN ),
-			'singular_name'      => __( "Example", Constants::PLUGIN_LANGUAGE_DOMAIN ),
-			'menu_name'          => __( "Example", Constants::PLUGIN_LANGUAGE_DOMAIN ),
-			'name_admin_bar'     => __( "Example", Constants::PLUGIN_LANGUAGE_DOMAIN ),
-			'add_new'            => __( "New Example", Constants::PLUGIN_LANGUAGE_DOMAIN ),
-			'add_new_item'       => __( "Add new Example", Constants::PLUGIN_LANGUAGE_DOMAIN ),
-			'new_item'           => __( "New Example", Constants::PLUGIN_LANGUAGE_DOMAIN ),
-			'edit_item'          => __( "Edit Example", Constants::PLUGIN_LANGUAGE_DOMAIN ),
-			'view_item'          => __( "View Example", Constants::PLUGIN_LANGUAGE_DOMAIN ),
-			'all_items'          => __( "All Examples", Constants::PLUGIN_LANGUAGE_DOMAIN ),
-			'search_items'       => __( "Search Examples", Constants::PLUGIN_LANGUAGE_DOMAIN ),
-			'parent_item_colon'  => __( "Parent Example", Constants::PLUGIN_LANGUAGE_DOMAIN ),
-			'not_found'          => __( "No Examples found", Constants::PLUGIN_LANGUAGE_DOMAIN ),
-			'not_found_in_trash' => __( "No Examples found in trash", Constants::PLUGIN_LANGUAGE_DOMAIN )
-		);
-		$args   = array(
-			'labels'             => $labels,
-			'description'        => __( 'Examples', Constants::PLUGIN_LANGUAGE_DOMAIN ),
-			'public'             => true,
-			'publicly_queryable' => true,
-			'show_ui'            => true,
-			'show_in_menu'       => Constants::PLUGIN_OPTIONS_PAGE,
-			'query_var'          => true,
-			'rewrite'            => array( 'slug' => 'example' ),
-			'capability_type'    => 'post',
-			'capabilities'       => array(
-				'edit_post'            => 'edit_post',
-				'read_post'            => 'read_post',
-				'delete_post'          => 'delete_post',
-				'delete_posts'         => 'delete_teams',
-				'edit_posts'           => 'delete_posts',
-				'edit_others_posts'    => 'edit_others_posts',
-				'delete_others_posts'  => 'delete_others_posts',
-				'publish_posts'        => 'publish_posts',
-				'read_private_posts'   => 'read_private_posts',
-				'delete_private_posts' => 'delete_private_posts',
-			),
-			'has_archive'        => true,
-			'hierarchical'       => true,
-			'menu_position'      => null,
-			'supports'           => array( 'title', 'revisions', 'thumbnail' )
-		);
-		register_post_type( "Example", $args );
+		/** @var Post_Type $example_post */
+		$example_post = $this->loader->add_post_type( "Example" );
+		$example_post->set_option( 'show_in_menu', Constants::PLUGIN_DASHBOARD_MAIN_MENU );
+		$example_post->set_option( "show_ui", true );
+		$example_post->set_supports( array( "title", "revisions", "thumbnail" ) );
+		$example_post->set_label( 'all_items', "Examples" );
 	}
-
 
 	public function run() {
 		$this->loader->run();

@@ -1,5 +1,6 @@
 <?php
-namespace PT_Setup;
+namespace Main\Custom;
+use Main\Constants;
 /**
  * Plugin Setup Class. Here everything related to activation and deactivation of the plugin is handled.
  */
