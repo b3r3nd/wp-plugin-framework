@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<checkstyle version="1.3.0">
+  <file name="includes/shortcodes/class-example-shortcode.php">
+    <error line="7" severity="error" message="No summary for class \PT_Shortcodes\Example_Shortcode" source="phpDocumentor.file.PPC:ERR-50005"/>
+    <error line="13" severity="error" message="No summary for method shortcode()" source="phpDocumentor.file.PPC:ERR-50008"/>
+  </file>
+  <file name="includes/class-frontend.php">
+    <error line="8" severity="error" message="No summary for class \PT_Setup\Frontend" source="phpDocumentor.file.PPC:ERR-50005"/>
+    <error line="9" severity="error" message="No summary for property $version" source="phpDocumentor.file.PPC:ERR-50007"/>
+  </file>
+  <file name="includes/class-plugin.php">
+    <error line="16" severity="error" message="No summary for class \PT_Setup\Plugin" source="phpDocumentor.file.PPC:ERR-50005"/>
+    <error line="175" severity="error" message="No summary for method get_version()" source="phpDocumentor.file.PPC:ERR-50008"/>
+    <error line="19" severity="error" message="No summary for property $plugin_slug" source="phpDocumentor.file.PPC:ERR-50007"/>
+    <error line="20" severity="error" message="No summary for property $version" source="phpDocumentor.file.PPC:ERR-50007"/>
+    <error line="21" severity="error" message="No summary for property $plugin_base_file" source="phpDocumentor.file.PPC:ERR-50007"/>
+    <error line="22" severity="error" message="No summary for property $required_plugins" source="phpDocumentor.file.PPC:ERR-50007"/>
+  </file>
+  <file name="includes/class-setup.php">
+    <error line="7" severity="error" message="No summary for class \PT_Setup\Setup" source="phpDocumentor.file.PPC:ERR-50005"/>
+    <error line="10" severity="error" message="Argument $required_plugins is missing from the Docblock of __construct" source="phpDocumentor.file.PPC:ERR-50015"/>
+    <error line="10" severity="error" message="No summary for method __construct()" source="phpDocumentor.file.PPC:ERR-50008"/>
+    <error line="8" severity="error" message="No summary for property $required_plugins" source="phpDocumentor.file.PPC:ERR-50007"/>
+  </file>
+  <file name="includes/class-constants.php">
+    <error line="7" severity="error" message="No summary for class \PT_Setup\Constants" source="phpDocumentor.file.PPC:ERR-50005"/>
+  </file>
+  <file name="includes/class-admin.php">
+    <error line="6" severity="error" message="No summary for class \PT_Setup\Admin" source="phpDocumentor.file.PPC:ERR-50005"/>
+    <error line="7" severity="error" message="No summary for property $version" source="phpDocumentor.file.PPC:ERR-50007"/>
+  </file>
+  <file name="includes/class-loader.php">
+    <error line="6" severity="error" message="No summary for class \PT_Setup\Loader" source="phpDocumentor.file.PPC:ERR-50005"/>
+    <error line="10" severity="error" message="No summary for method __construct()" source="phpDocumentor.file.PPC:ERR-50008"/>
+    <error line="20" severity="error" message="No summary for method add_action()" source="phpDocumentor.file.PPC:ERR-50008"/>
+    <error line="29" severity="error" message="No summary for method add_filter()" source="phpDocumentor.file.PPC:ERR-50008"/>
+    <error line="41" severity="error" message="No summary for method add()" source="phpDocumentor.file.PPC:ERR-50008"/>
+    <error line="7" severity="error" message="No summary for property $actions" source="phpDocumentor.file.PPC:ERR-50007"/>
+    <error line="8" severity="error" message="No summary for property $filters" source="phpDocumentor.file.PPC:ERR-50007"/>
+  </file>
+  <file name="plugin-template.php">
+    <error line="15" severity="error" message="No summary for function \run_plugin()" source="phpDocumentor.file.PPC:ERR-50011"/>
+  </file>
+</checkstyle>

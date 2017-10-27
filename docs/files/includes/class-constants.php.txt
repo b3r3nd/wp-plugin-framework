@@ -1,0 +1,25 @@
+<?php
+/**
+ * We use the Constants Class to define some values used on multiple locations to keep it easy to modify.
+ */
+namespace PT_Setup;
+
+class Constants {
+	const PLUGIN_NAME = "plugin_template";
+	const PLUGIN_SHORTNAME = "pt";
+	const PLUGIN_VERSION = "1.0.0";
+	const PLUGIN_LANGUAGE_DOMAIN = "plugin_template_language";
+	const PLUGIN_AUTHOR = "ComSi";
+	const PLUGIN_URL = "http://plugins.comsi.nl";
+	const PLUGIN_SETUP_NAMESPACE = "PT_Setup";
+	const PLUGIN_OPTIONS_GROUP = "template_plugin";
+	const PLUGIN_OPTIONS_PAGE = "plugin-template-options";
+	const PLUGIN_OPTIONS_SUB_PAGE = "plugin-template-options-sub";
+	const SETTINGS_SUB_PAGE = "settings-sub-page";
+
+
+
+
+	const INIT_SHORTCODES = true;
+	const INIT_ADMIN_MENU = true;
+}

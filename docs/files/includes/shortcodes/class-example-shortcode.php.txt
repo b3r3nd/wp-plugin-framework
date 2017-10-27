@@ -1,0 +1,20 @@
+<?php
+/**
+ * First Example Shortcode.
+ */
+
+namespace PT_Shortcodes;
+class Example_Shortcode {
+	/**
+	 * @param $attrs
+	 *
+	 * @return string
+	 */
+	public function shortcode( $attrs ) {
+		ob_start(); ?>
+
+        Example Shortcode.
+
+		<?php return ob_get_clean();
+	}
+}

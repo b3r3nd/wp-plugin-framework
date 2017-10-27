@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+    <meta charset="utf-8"/>
+    <title>    API Documentation &raquo; \PT_Setup\Constants
+</title>
+    <meta name="author" content=""/>
+    <meta name="description" content=""/>
+
+            <link href="../css/template.css" rel="stylesheet" media="all"/>
+    
+            <!--[if lt IE 9]>
+        <script src="https://html5shim.googlecode.com/svn/trunk/html5.js" type="text/javascript"></script>
+        <![endif]-->
+        <script src="../js/jquery-1.7.1.min.js" type="text/javascript"></script>
+        <script src="../js/jquery-ui-1.8.2.custom.min.js" type="text/javascript"></script>
+        <script src="../js/jquery.mousewheel.min.js" type="text/javascript"></script>
+        <script src="../js/bootstrap.js" type="text/javascript"></script>
+        <script src="../js/template.js" type="text/javascript"></script>
+        <script src="../js/prettify/prettify.min.js" type="text/javascript"></script>
+    
+            <link rel="shortcut icon" href="../img/favicon.ico"/>
+        <link rel="apple-touch-icon" href="../img/apple-touch-icon.png"/>
+        <link rel="apple-touch-icon" sizes="72x72" href="../img/apple-touch-icon-72x72.png"/>
+        <link rel="apple-touch-icon" sizes="114x114" href="../img/apple-touch-icon-114x114.png"/>
+    </head>
+<body>
+
+        <div class="navbar navbar-fixed-top">
+        <div class="navbar-inner">
+            <div class="container">
+                <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                    <span class="icon-bar"></span> <span class="icon-bar"></span>
+                    <span class="icon-bar"></span> </a>
+                <a class="brand" href="../index.html">API Documentation</a>
+
+                <div class="nav-collapse">
+                    <ul class="nav">
+                        <li class="dropdown">
+                            <a href="#api" class="dropdown-toggle" data-toggle="dropdown">
+                                API Documentation <b class="caret"></b>
+                            </a>
+                            <ul class="dropdown-menu">
+                                                                    <li><a>Namespaces</a></li>
+                                                                        <li><a href="../namespaces/PT_Shortcodes.html">PT_Shortcodes</a></li>
+                                                                        <li><a href="../namespaces/PT_Setup.html">PT_Setup</a></li>
+                                                                                                                                </ul>
+                        </li>
+                        <li class="dropdown" id="charts-menu">
+                            <a href="#charts" class="dropdown-toggle" data-toggle="dropdown">
+                                Charts <b class="caret"></b>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a href="../graph_class.html">
+                                        <i class="icon-list-alt"></i>&#160;Class hierarchy diagram
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="dropdown" id="reports-menu">
+                            <a href="#reports" class="dropdown-toggle" data-toggle="dropdown">
+                                Reports <b class="caret"></b>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a href="../errors.html">
+                                        <i class="icon-list-alt"></i>&#160;Errors
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="../markers.html">
+                                        <i class="icon-list-alt"></i>&#160;Markers
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="../deprecated.html">
+                                        <i class="icon-list-alt"></i>&#160;Deprecated
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="go_to_top">
+            <a href="#___" style="color: inherit">Back to top&#160;&#160;<i class="icon-upload icon-white"></i></a>
+        </div>
+    </div>
+    
+    <div id="___" class="container">
+        <noscript>
+            <div class="alert alert-warning">
+                Javascript is disabled; several features are only available if Javascript is enabled.
+            </div>
+        </noscript>
+
+        
+            <style>
+        .deprecated h2 {
+            text-decoration: line-through;
+        }
+    </style>
+    <div class="row">
+        <div class="span4">
+                    <div class="btn-group view pull-right" data-toggle="buttons-radio">
+        <button class="btn details" title="Show descriptions and method names"><i class="icon-list"></i></button>
+        <button class="btn simple" title="Show only method names"><i class="icon-align-justify"></i></button>
+    </div>
+    <div class="btn-group visibility" data-toggle="buttons-checkbox">
+        <button class="btn public active" title="Show public elements">Public</button>
+        <button class="btn protected" title="Show protected elements">Protected</button>
+        <button class="btn private" title="Show private elements">Private</button>
+        <button class="btn inherited active" title="Show inherited elements">Inherited</button>
+    </div>
+
+        <ul class="side-nav nav nav-list">
+        <li class="nav-header">
+            <i class="icon-custom icon-method"></i> Methods
+            <ul>
+                                            </ul>
+        </li>
+        <li class="nav-header protected">» Protected
+            <ul>
+                                            </ul>
+        </li>
+        <li class="nav-header private">» Private
+            <ul>
+                                            </ul>
+        </li>
+        <li class="nav-header">
+            <i class="icon-custom icon-constant"></i> Constants
+            <ul>
+                                <li class="constant ">
+                    <a href="#constant_INIT_ADMIN_MENU" title="INIT_ADMIN_MENU :: Define if the admin menu needs to be registered">
+                        <span class="description">Define if the admin menu needs to be registered</span><pre>INIT_ADMIN_MENU</pre>
+                    </a>
+                </li>
+                                <li class="constant ">
+                    <a href="#constant_INIT_ADMIN_SCRIPT" title="INIT_ADMIN_SCRIPT :: Define if the admin scripts needs to be registered in the wp_admin">
+                        <span class="description">Define if the admin scripts needs to be registered in the wp_admin</span><pre>INIT_ADMIN_SCRIPT</pre>
+                    </a>
+                </li>
+                                <li class="constant ">
+                    <a href="#constant_INIT_FRONTEND_SCRIPTS" title="INIT_FRONTEND_SCRIPTS :: Define if the scripts and styles in the frontend need to be registered">
+                        <span class="description">Define if the scripts and styles in the frontend need to be registered</span><pre>INIT_FRONTEND_SCRIPTS</pre>
+                    </a>
+                </li>
+                                <li class="constant ">
+                    <a href="#constant_INIT_PLUGIN_SETTINGS" title="INIT_PLUGIN_SETTINGS :: Define if the plugin settings need to be registered">
+                        <span class="description">Define if the plugin settings need to be registered</span><pre>INIT_PLUGIN_SETTINGS</pre>
+                    </a>
+                </li>
+                                <li class="constant ">
+                    <a href="#constant_INIT_POST_TYPES" title="INIT_POST_TYPES :: Define if post types need to be registered">
+                        <span class="description">Define if post types need to be registered</span><pre>INIT_POST_TYPES</pre>
+                    </a>
+                </li>
+                                <li class="constant ">
+                    <a href="#constant_INIT_SHORTCODES" title="INIT_SHORTCODES :: Define if shortcodes need to be registered">
+                        <span class="description">Define if shortcodes need to be registered</span><pre>INIT_SHORTCODES</pre>
+                    </a>
+                </li>
+                                <li class="constant ">
+                    <a href="#constant_PLUGIN_AUTHOR" title="PLUGIN_AUTHOR :: Plugin author">
+                        <span class="description">Plugin author</span><pre>PLUGIN_AUTHOR</pre>
+                    </a>
+                </li>
+                                <li class="constant ">
+                    <a href="#constant_PLUGIN_LANGUAGE_DOMAIN" title="PLUGIN_LANGUAGE_DOMAIN :: Language domain">
+                        <span class="description">Language domain</span><pre>PLUGIN_LANGUAGE_DOMAIN</pre>
+                    </a>
+                </li>
+                                <li class="constant ">
+                    <a href="#constant_PLUGIN_NAME" title="PLUGIN_NAME :: Name of the plugin">
+                        <span class="description">Name of the plugin</span><pre>PLUGIN_NAME</pre>
+                    </a>
+                </li>
+                                <li class="constant ">
+                    <a href="#constant_PLUGIN_OPTIONS_GROUP" title="PLUGIN_OPTIONS_GROUP :: options group for settings">
+                        <span class="description">options group for settings</span><pre>PLUGIN_OPTIONS_GROUP</pre>
+                    </a>
+                </li>
+                                <li class="constant ">
+                    <a href="#constant_PLUGIN_OPTIONS_PAGE" title="PLUGIN_OPTIONS_PAGE :: default options page">
+                        <span class="description">default options page</span><pre>PLUGIN_OPTIONS_PAGE</pre>
+                    </a>
+                </li>
+                                <li class="constant ">
+                    <a href="#constant_PLUGIN_OPTIONS_SUB_PAGE" title="PLUGIN_OPTIONS_SUB_PAGE :: default options sub page">
+                        <span class="description">default options sub page</span><pre>PLUGIN_OPTIONS_SUB_PAGE</pre>
+                    </a>
+                </li>
+                                <li class="constant ">
+                    <a href="#constant_PLUGIN_SETUP_NAMESPACE" title="PLUGIN_SETUP_NAMESPACE :: setup namespace">
+                        <span class="description">setup namespace</span><pre>PLUGIN_SETUP_NAMESPACE</pre>
+                    </a>
+                </li>
+                                <li class="constant ">
+                    <a href="#constant_PLUGIN_SHORTNAME" title="PLUGIN_SHORTNAME :: Short tag for the plugin">
+                        <span class="description">Short tag for the plugin</span><pre>PLUGIN_SHORTNAME</pre>
+                    </a>
+                </li>
+                                <li class="constant ">
+                    <a href="#constant_PLUGIN_URL" title="PLUGIN_URL :: Plugin URL">
+                        <span class="description">Plugin URL</span><pre>PLUGIN_URL</pre>
+                    </a>
+                </li>
+                                <li class="constant ">
+                    <a href="#constant_PLUGIN_VERSION" title="PLUGIN_VERSION :: Plugin version">
+                        <span class="description">Plugin version</span><pre>PLUGIN_VERSION</pre>
+                    </a>
+                </li>
+                                <li class="constant ">
+                    <a href="#constant_SETTINGS_SUB_PAGE" title="SETTINGS_SUB_PAGE :: default wordpress settings page">
+                        <span class="description">default wordpress settings page</span><pre>SETTINGS_SUB_PAGE</pre>
+                    </a>
+                </li>
+                            </ul>
+        </li>
+    </ul>
+
+
+        </div>
+
+        <div class="span8">
+            <div class="element class">
+                <h1>Constants</h1>
+                <small style="display: block; text-align: right">
+                                                        </small>
+                <p class="short_description">We use the Constants Class to define some values used on multiple locations to keep it easy to modify.</p>
+                <div class="details">
+                    <div class="long_description">
+                        
+                    </div>
+                    <table class="table table-bordered">
+                                                                                    <tr>
+                                    <th>
+                                        package
+                                                                            </th>
+                                    <td>
+                                                                                    
+                                                                                <p>Default</p>
+                                    </td>
+                                </tr>
+                                                                                                                                                                                </table>
+
+                    <h3><i class="icon-custom icon-method"></i> Methods</h3>
+                                        
+                                            <h3><i class="icon-custom icon-constant"></i> Constants</h3>
+                                                    <a id="constant_PLUGIN_NAME"> </a>
+                            <div class="element clickable constant  constant_PLUGIN_NAME" data-toggle="collapse" data-target=".constant_PLUGIN_NAME .collapse">
+                                <h2>Name of the plugin</h2>
+                                <pre>PLUGIN_NAME</pre>
+                                <div class="labels">
+                                                                    </div>
+                                <div class="row collapse">
+                                    <div class="detail-description">
+                                        <div class="long_description"></div>
+                                        <table class="table">
+                                                                                            <tr>
+                                                    <th>
+                                                        
+                                                    </th>
+                                                    <td>
+                                                                                                            </td>
+                                                </tr>
+                                                                                    </table>
+                                    </div>
+                                </div>
+                            </div>
+                                                    <a id="constant_PLUGIN_SHORTNAME"> </a>
+                            <div class="element clickable constant  constant_PLUGIN_SHORTNAME" data-toggle="collapse" data-target=".constant_PLUGIN_SHORTNAME .collapse">
+                                <h2>Short tag for the plugin</h2>
+                                <pre>PLUGIN_SHORTNAME</pre>
+                                <div class="labels">
+                                                                    </div>
+                                <div class="row collapse">
+                                    <div class="detail-description">
+                                        <div class="long_description"></div>
+                                        <table class="table">
+                                                                                            <tr>
+                                                    <th>
+                                                        
+                                                    </th>
+                                                    <td>
+                                                                                                            </td>
+                                                </tr>
+                                                                                    </table>
+                                    </div>
+                                </div>
+                            </div>
+                                                    <a id="constant_PLUGIN_VERSION"> </a>
+                            <div class="element clickable constant  constant_PLUGIN_VERSION" data-toggle="collapse" data-target=".constant_PLUGIN_VERSION .collapse">
+                                <h2>Plugin version</h2>
+                                <pre>PLUGIN_VERSION</pre>
+                                <div class="labels">
+                                                                    </div>
+                                <div class="row collapse">
+                                    <div class="detail-description">
+                                        <div class="long_description"></div>
+                                        <table class="table">
+                                                                                            <tr>
+                                                    <th>
+                                                        
+                                                    </th>
+                                                    <td>
+                                                                                                            </td>
+                                                </tr>
+                                                                                    </table>
+                                    </div>
+                                </div>
+                            </div>
+                                                    <a id="constant_PLUGIN_LANGUAGE_DOMAIN"> </a>
+                            <div class="element clickable constant  constant_PLUGIN_LANGUAGE_DOMAIN" data-toggle="collapse" data-target=".constant_PLUGIN_LANGUAGE_DOMAIN .collapse">
+                                <h2>Language domain</h2>
+                                <pre>PLUGIN_LANGUAGE_DOMAIN</pre>
+                                <div class="labels">
+                                                                    </div>
+                                <div class="row collapse">
+                                    <div class="detail-description">
+                                        <div class="long_description"></div>
+                                        <table class="table">
+                                                                                            <tr>
+                                                    <th>
+                                                        
+                                                    </th>
+                                                    <td>
+                                                                                                            </td>
+                                                </tr>
+                                                                                    </table>
+                                    </div>
+                                </div>
+                            </div>
+                                                    <a id="constant_PLUGIN_AUTHOR"> </a>
+                            <div class="element clickable constant  constant_PLUGIN_AUTHOR" data-toggle="collapse" data-target=".constant_PLUGIN_AUTHOR .collapse">
+                                <h2>Plugin author</h2>
+                                <pre>PLUGIN_AUTHOR</pre>
+                                <div class="labels">
+                                                                    </div>
+                                <div class="row collapse">
+                                    <div class="detail-description">
+                                        <div class="long_description"></div>
+                                        <table class="table">
+                                                                                            <tr>
+                                                    <th>
+                                                        
+                                                    </th>
+                                                    <td>
+                                                                                                            </td>
+                                                </tr>
+                                                                                    </table>
+                                    </div>
+                                </div>
+                            </div>
+                                                    <a id="constant_PLUGIN_URL"> </a>
+                            <div class="element clickable constant  constant_PLUGIN_URL" data-toggle="collapse" data-target=".constant_PLUGIN_URL .collapse">
+                                <h2>Plugin URL</h2>
+                                <pre>PLUGIN_URL</pre>
+                                <div class="labels">
+                                                                    </div>
+                                <div class="row collapse">
+                                    <div class="detail-description">
+                                        <div class="long_description"></div>
+                                        <table class="table">
+                                                                                            <tr>
+                                                    <th>
+                                                        
+                                                    </th>
+                                                    <td>
+                                                                                                            </td>
+                                                </tr>
+                                                                                    </table>
+                                    </div>
+                                </div>
+                            </div>
+                                                    <a id="constant_PLUGIN_SETUP_NAMESPACE"> </a>
+                            <div class="element clickable constant  constant_PLUGIN_SETUP_NAMESPACE" data-toggle="collapse" data-target=".constant_PLUGIN_SETUP_NAMESPACE .collapse">
+                                <h2>setup namespace</h2>
+                                <pre>PLUGIN_SETUP_NAMESPACE</pre>
+                                <div class="labels">
+                                                                    </div>
+                                <div class="row collapse">
+                                    <div class="detail-description">
+                                        <div class="long_description"></div>
+                                        <table class="table">
+                                                                                            <tr>
+                                                    <th>
+                                                        
+                                                    </th>
+                                                    <td>
+                                                                                                            </td>
+                                                </tr>
+                                                                                    </table>
+                                    </div>
+                                </div>
+                            </div>
+                                                    <a id="constant_PLUGIN_OPTIONS_GROUP"> </a>
+                            <div class="element clickable constant  constant_PLUGIN_OPTIONS_GROUP" data-toggle="collapse" data-target=".constant_PLUGIN_OPTIONS_GROUP .collapse">
+                                <h2>options group for settings</h2>
+                                <pre>PLUGIN_OPTIONS_GROUP</pre>
+                                <div class="labels">
+                                                                    </div>
+                                <div class="row collapse">
+                                    <div class="detail-description">
+                                        <div class="long_description"></div>
+                                        <table class="table">
+                                                                                            <tr>
+                                                    <th>
+                                                        
+                                                    </th>
+                                                    <td>
+                                                                                                            </td>
+                                                </tr>
+                                                                                    </table>
+                                    </div>
+                                </div>
+                            </div>
+                                                    <a id="constant_PLUGIN_OPTIONS_PAGE"> </a>
+                            <div class="element clickable constant  constant_PLUGIN_OPTIONS_PAGE" data-toggle="collapse" data-target=".constant_PLUGIN_OPTIONS_PAGE .collapse">
+                                <h2>default options page</h2>
+                                <pre>PLUGIN_OPTIONS_PAGE</pre>
+                                <div class="labels">
+                                                                    </div>
+                                <div class="row collapse">
+                                    <div class="detail-description">
+                                        <div class="long_description"></div>
+                                        <table class="table">
+                                                                                            <tr>
+                                                    <th>
+                                                        
+                                                    </th>
+                                                    <td>
+                                                                                                            </td>
+                                                </tr>
+                                                                                    </table>
+                                    </div>
+                                </div>
+                            </div>
+                                                    <a id="constant_PLUGIN_OPTIONS_SUB_PAGE"> </a>
+                            <div class="element clickable constant  constant_PLUGIN_OPTIONS_SUB_PAGE" data-toggle="collapse" data-target=".constant_PLUGIN_OPTIONS_SUB_PAGE .collapse">
+                                <h2>default options sub page</h2>
+                                <pre>PLUGIN_OPTIONS_SUB_PAGE</pre>
+                                <div class="labels">
+                                                                    </div>
+                                <div class="row collapse">
+                                    <div class="detail-description">
+                                        <div class="long_description"></div>
+                                        <table class="table">
+                                                                                            <tr>
+                                                    <th>
+                                                        
+                                                    </th>
+                                                    <td>
+                                                                                                            </td>
+                                                </tr>
+                                                                                    </table>
+                                    </div>
+                                </div>
+                            </div>
+                                                    <a id="constant_SETTINGS_SUB_PAGE"> </a>
+                            <div class="element clickable constant  constant_SETTINGS_SUB_PAGE" data-toggle="collapse" data-target=".constant_SETTINGS_SUB_PAGE .collapse">
+                                <h2>default wordpress settings page</h2>
+                                <pre>SETTINGS_SUB_PAGE</pre>
+                                <div class="labels">
+                                                                    </div>
+                                <div class="row collapse">
+                                    <div class="detail-description">
+                                        <div class="long_description"></div>
+                                        <table class="table">
+                                                                                            <tr>
+                                                    <th>
+                                                        
+                                                    </th>
+                                                    <td>
+                                                                                                            </td>
+                                                </tr>
+                                                                                    </table>
+                                    </div>
+                                </div>
+                            </div>
+                                                    <a id="constant_INIT_SHORTCODES"> </a>
+                            <div class="element clickable constant  constant_INIT_SHORTCODES" data-toggle="collapse" data-target=".constant_INIT_SHORTCODES .collapse">
+                                <h2>Define if shortcodes need to be registered</h2>
+                                <pre>INIT_SHORTCODES</pre>
+                                <div class="labels">
+                                                                    </div>
+                                <div class="row collapse">
+                                    <div class="detail-description">
+                                        <div class="long_description"></div>
+                                        <table class="table">
+                                                                                            <tr>
+                                                    <th>
+                                                        
+                                                    </th>
+                                                    <td>
+                                                                                                            </td>
+                                                </tr>
+                                                                                    </table>
+                                    </div>
+                                </div>
+                            </div>
+                                                    <a id="constant_INIT_ADMIN_MENU"> </a>
+                            <div class="element clickable constant  constant_INIT_ADMIN_MENU" data-toggle="collapse" data-target=".constant_INIT_ADMIN_MENU .collapse">
+                                <h2>Define if the admin menu needs to be registered</h2>
+                                <pre>INIT_ADMIN_MENU</pre>
+                                <div class="labels">
+                                                                    </div>
+                                <div class="row collapse">
+                                    <div class="detail-description">
+                                        <div class="long_description"></div>
+                                        <table class="table">
+                                                                                            <tr>
+                                                    <th>
+                                                        
+                                                    </th>
+                                                    <td>
+                                                                                                            </td>
+                                                </tr>
+                                                                                    </table>
+                                    </div>
+                                </div>
+                            </div>
+                                                    <a id="constant_INIT_POST_TYPES"> </a>
+                            <div class="element clickable constant  constant_INIT_POST_TYPES" data-toggle="collapse" data-target=".constant_INIT_POST_TYPES .collapse">
+                                <h2>Define if post types need to be registered</h2>
+                                <pre>INIT_POST_TYPES</pre>
+                                <div class="labels">
+                                                                    </div>
+                                <div class="row collapse">
+                                    <div class="detail-description">
+                                        <div class="long_description"></div>
+                                        <table class="table">
+                                                                                            <tr>
+                                                    <th>
+                                                        
+                                                    </th>
+                                                    <td>
+                                                                                                            </td>
+                                                </tr>
+                                                                                    </table>
+                                    </div>
+                                </div>
+                            </div>
+                                                    <a id="constant_INIT_ADMIN_SCRIPT"> </a>
+                            <div class="element clickable constant  constant_INIT_ADMIN_SCRIPT" data-toggle="collapse" data-target=".constant_INIT_ADMIN_SCRIPT .collapse">
+                                <h2>Define if the admin scripts needs to be registered in the wp_admin</h2>
+                                <pre>INIT_ADMIN_SCRIPT</pre>
+                                <div class="labels">
+                                                                    </div>
+                                <div class="row collapse">
+                                    <div class="detail-description">
+                                        <div class="long_description"></div>
+                                        <table class="table">
+                                                                                            <tr>
+                                                    <th>
+                                                        
+                                                    </th>
+                                                    <td>
+                                                                                                            </td>
+                                                </tr>
+                                                                                    </table>
+                                    </div>
+                                </div>
+                            </div>
+                                                    <a id="constant_INIT_FRONTEND_SCRIPTS"> </a>
+                            <div class="element clickable constant  constant_INIT_FRONTEND_SCRIPTS" data-toggle="collapse" data-target=".constant_INIT_FRONTEND_SCRIPTS .collapse">
+                                <h2>Define if the scripts and styles in the frontend need to be registered</h2>
+                                <pre>INIT_FRONTEND_SCRIPTS</pre>
+                                <div class="labels">
+                                                                    </div>
+                                <div class="row collapse">
+                                    <div class="detail-description">
+                                        <div class="long_description"></div>
+                                        <table class="table">
+                                                                                            <tr>
+                                                    <th>
+                                                        
+                                                    </th>
+                                                    <td>
+                                                                                                            </td>
+                                                </tr>
+                                                                                    </table>
+                                    </div>
+                                </div>
+                            </div>
+                                                    <a id="constant_INIT_PLUGIN_SETTINGS"> </a>
+                            <div class="element clickable constant  constant_INIT_PLUGIN_SETTINGS" data-toggle="collapse" data-target=".constant_INIT_PLUGIN_SETTINGS .collapse">
+                                <h2>Define if the plugin settings need to be registered</h2>
+                                <pre>INIT_PLUGIN_SETTINGS</pre>
+                                <div class="labels">
+                                                                    </div>
+                                <div class="row collapse">
+                                    <div class="detail-description">
+                                        <div class="long_description"></div>
+                                        <table class="table">
+                                                                                            <tr>
+                                                    <th>
+                                                        
+                                                    </th>
+                                                    <td>
+                                                                                                            </td>
+                                                </tr>
+                                                                                    </table>
+                                    </div>
+                                </div>
+                            </div>
+                                            
+                                                        </div>
+            </div>
+            <a id="\PT_Setup\Constants"></a>
+            <ul class="breadcrumb">
+                <li><a href="../index.html"><i class="icon-custom icon-class"></i></a></li>
+                    
+    
+    <li><span class="divider">\</span><a href="../namespaces/PT_Setup.html">PT_Setup</a></li>
+
+                <li class="active"><span class="divider">\</span><a href="../classes/PT_Setup.Constants.html">Constants</a></li>
+            </ul>
+        </div>
+    </div>
+
+    </div>
+
+        <footer class="span12">
+            Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by
+            <a href="http://glyphicons.com/">Glyphicons</a>.<br/>
+            Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and<br/>
+            generated on Fri, 27 Oct 2017 11:24:38 +0000.<br/>
+    </footer>
+    </body>
+</html>
