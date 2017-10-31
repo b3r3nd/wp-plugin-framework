@@ -19,7 +19,14 @@ class Loader {
 	protected $plugin_settings;
 	protected $admin_scripts;
 	protected $frontend_scripts;
+	/**
+	 * @TODO Add functions for plugin settings
+	 * @TODO Add functions for taxonomies
+	 */
 
+	/**
+	 * Loader constructor.
+	 */
 	public function __construct() {
 		$this->actions         = array();
 		$this->filters         = array();

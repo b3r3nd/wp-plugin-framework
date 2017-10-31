@@ -33,6 +33,10 @@ class Plugin {
 	protected $version;
 	protected $plugin_base_file;
 	protected $required_plugins;
+	/**
+	 * @TODO Define function for plugin settings
+	 * @TODo Define function for taxonomies
+	 */
 
 	/**
 	 * Plugin constructor.
@@ -145,6 +149,9 @@ class Plugin {
 	 * @post_supports thumbnail
 	 * @post_caps post
 	 * @showui options-page
+	 *
+	 * @TODO Define if you want to overwrite a single-template file.
+	 * @TODO Define if you want to overwrite a archive-template file.
 	 */
 	private function define_custom_post_types() {
 		/** @var Post_Type $example_post */

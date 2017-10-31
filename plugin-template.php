@@ -6,6 +6,7 @@
  * Version: 1.0.0
  * Author: ComSi
  * Author URI: http://www.plugins.comsi.nl
+ *
  */
 if ( ! defined( 'WPINC' ) ) {
 	die;

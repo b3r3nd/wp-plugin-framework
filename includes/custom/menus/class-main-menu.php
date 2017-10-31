@@ -9,6 +9,12 @@ namespace Main\Custom\Menus;
 use Main\Framework\Menu_Interface;
 use Main\Constants;
 
+/**
+ * @TODO Wrapper so registered settings will automaticly added to this menu page.
+ * Class Main_Menu
+ *
+ * @package Main\Custom\Menus
+ */
 class Main_Menu implements Menu_Interface {
 	public function menu_page() {
 		?>
