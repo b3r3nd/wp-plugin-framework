@@ -12,6 +12,9 @@ class Post_Type {
 	private $options;
 	private $capabilities;
 	private $supports;
+	private $taxonomies;
+	private $single_template;
+	private $archive_template;
 
 	/**
 	 * Post_Type constructor.
@@ -28,6 +31,54 @@ class Post_Type {
 		$this->capabilities = $capabilities;
 		$this->supports     = $supports;
 		$this->options      = $options;
+		$this->single_template = false;
+		$this->archive_template = false;
+	}
+
+	/**
+	 * @param $location
+	 */
+	public function set_single_template($location) {
+		$this->single_template = $location;
+	}
+
+	/**
+	 * @param $location
+	 */
+	public function set_archive_template($location) {
+		$this->archive_template = $location;
+	}
+
+	/**
+	 * @return mixed
+	 */
+	public function get_single_template() {
+		return $this->single_template;
+	}
+
+	/**
+	 * @return mixed
+	 */
+	public function get_archive_template() {
+		return $this->archive_template;
+	}
+
+
+
+	/**
+	 * @param $taxonomy String
+	 * @param $args array
+	 */
+	public function add_taxonomy($taxonomy, $args = array()) {
+		$taxonomyObj = new Taxonomy($taxonomy, $this->get_post_type(), $args);
+		$this->taxonomies[] = $taxonomyObj;
+	}
+
+	/**
+	 * @return mixed
+	 */
+	public function get_taxonomies() {
+		return $this->taxonomies;
 	}
 
 	/**

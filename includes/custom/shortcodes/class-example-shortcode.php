@@ -10,7 +10,7 @@ use Main\Framework\Shortcode_Interface;
  * @why As example
  * @usedFor a test page
  */
-class Example_ShortcodeInterface implements Shortcode_Interface {
+class Example_Shortcode implements Shortcode_Interface {
 	/**
 	 * @param $attrs
 	 *

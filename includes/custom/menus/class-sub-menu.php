@@ -10,7 +10,6 @@ use Main\Framework\Menu_Interface;
 
 class Sub_Menu implements Menu_Interface {
 	public function menu_page() {
-		// TODO: Implement menu_page() method.
-		echo "hoi!";
+		echo "Sub menu";
 	}
 }

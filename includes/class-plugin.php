@@ -7,24 +7,16 @@ use Main\Custom\Frontend;
 use Main\Custom\Menus\Main_Menu;
 use Main\Custom\Menus\Sub_Menu;
 use Main\Custom\Setup;
-use Main\Custom\Shortcodes\Example_ShortcodeInterface;
+use Main\Custom\Shortcodes\Example_Shortcode;
 use Main\Framework\Entities\Post_Type;
 use Main\Framework\Loader;
 
 /**
- * Basic Plugin file were everything is loaded. Keep in mind when adding more and more custom post types, shortcodes,
+ * Basic Plugin file were everything is loaded and configured. Keep in mind when adding more and more custom post types, shortcodes,
  * dependencies and other hooks that you start seperating each function in its own file.
  *
- * For smaller plug-ins this including it all in one file like this is fine.
+ * For smaller plug-ins including it all in one file like this is fine.
  *
- * @shortcode example_shortcode
- * @post_type Example
- *
- * @action admin_enqueue_scripts
- * @action admin_menu
- * @action wp_enqueue_scripts
- * @action plugin_activation
- * @action plugin_deactivation
  */
 class Plugin {
 	/** @var  $loader Loader */
@@ -33,10 +25,6 @@ class Plugin {
 	protected $version;
 	protected $plugin_base_file;
 	protected $required_plugins;
-	/**
-	 * @TODO Define function for plugin settings
-	 * @TODo Define function for taxonomies
-	 */
 
 	/**
 	 * Plugin constructor.
@@ -55,26 +43,26 @@ class Plugin {
 		$this->define_global_frontend_hooks();
 		$this->define_custom_post_types();
 		$this->define_menus();
-
+		$this->define_plugin_options();
 	}
 
 	/**
-	 * Loads all the required files and vendors.
+	 * This function load all the required dependencies not added by the default framework, if you added a new class
+	 * please include it here.
 	 */
 	private function load_dependencies() {
 		require_once( 'custom/class-admin.php' );
 		require_once( 'custom/class-frontend.php' );
 		require_once( 'custom/class-setup.php' );
 		require_once( 'custom/shortcodes/class-example-shortcode.php' );
-		require_once('custom/menus/class-main-menu.php');
-		require_once('custom/menus/class-sub-menu.php');
+		require_once( 'custom/menus/class-main-menu.php' );
+		require_once( 'custom/menus/class-sub-menu.php' );
 		$this->loader = new Loader();
 	}
 
 	/**
-	 * Define required plugins before this plugin can be used.
+	 * This function is used to define plugin which need to be installed before this plugin can be activated.
 	 *
-	 * @hook plugin_setup - runs when plugin is first setup
 	 * @usage array("gravityforms/gravityforms.php")
 	 */
 	private function define_required_plugins() {
@@ -83,15 +71,66 @@ class Plugin {
 	}
 
 	/**
-	 * Define all menus here.
+	 * This function is used to add all options needed by the plugin.
+	 *
+	 * See two examples below.
 	 */
-	private function define_menus() {
-		$this->loader->add_menu("Template", "Template", "administrator", Constants::PLUGIN_DASHBOARD_MAIN_MENU, new Main_Menu());
-		$this->loader->add_sub_menu(Constants::PLUGIN_DASHBOARD_MAIN_MENU, "Sub Menu", "Sub Menu", "administrator", "template_sub", new Sub_Menu());
+	public function define_plugin_options() {
+		$this->loader->add_option( 'example', "text", "First Example" );
+		$this->loader->add_option( 'example2', "number", "Second Example" );
 	}
 
 	/**
-	 * Define all admin hooks.
+	 * This function is used to define any extra menu items or sub menu items.
+	 *
+	 * See two examples below.
+	 */
+	private function define_menus() {
+		$this->loader->add_menu( "Template", "Template", "administrator", Constants::PLUGIN_DASHBOARD_MAIN_MENU, new Main_Menu() );
+		$this->loader->add_sub_menu( Constants::PLUGIN_DASHBOARD_MAIN_MENU, "Sub Menu", "Sub Menu", "administrator", "template_sub", new Sub_Menu() );
+	}
+
+	/**
+	 * This function is used to define any shortcodes which the plugin uses. When you want to register a new shortcode
+	 * you should create a new class in the includes/custom/shortcodes folder and implement the shortcode interface.
+	 * You will be asked to overwrite a function called shortcode, this function will be called when the shortcode
+	 * is used.
+	 *
+	 * One example shortcode is added bellow inlcuding the required class.
+	 */
+	private function define_shortcodes() {
+		$this->loader->add_shortcode( "example_shortcode", new Example_Shortcode() );
+	}
+
+	/**
+	 * This function is used to define all custom post types used by the plugin. See the add_post_type function for
+	 * all parameters. You can provide all parameters or simply pass the name and add options later if required.
+	 *
+	 * The add_post_type functions returns the post_type Object, you can use this object to modify the custom post type.
+	 * Say for example you want to add new taxonomies, provide the supported items or labels, or overwrite template
+	 * filese. All can be done afterwards.
+	 *
+	 * I added a couple of examples below how to add and modify a custom post type.
+	 *
+	 */
+	private function define_custom_post_types() {
+		/** @var Post_Type $example_post */
+		$example_post = $this->loader->add_post_type( "Example" );
+		//$example_post->set_option( 'show_in_menu', Constants::PLUGIN_DASHBOARD_MAIN_MENU ); // Add it to plugin menu
+		$example_post->set_option( "show_ui", true );
+		$example_post->set_options(array('public' => true, "has_archive" => true));
+		$example_post->set_supports( array( "title", "revisions", "thumbnail" ) );
+		$example_post->set_labels(array("all_items" => "Examples", "name" => "Example", "singular_name" => "Example"));
+		$example_post->add_taxonomy("taxonomy_test", array("label" => "Test Taxonomy"));
+		$example_post->set_single_template( plugin_dir() . "/includes/custom/templates/single-example.php");
+		$example_post->set_archive_template( plugin_dir() . "/includes/custom/templates/archive-example.php");
+	}
+
+
+	/**
+	 * This function is used to define the admin hooks, in this case just to register scripts and styles in the
+	 * wp-admin. The Admin class in includes/custom can be modified if you want to include more actions or filters
+	 * for in the wp-admin.
 	 *
 	 * @action admin_enqueue_scripts
 	 * @action admin_menu
@@ -100,12 +139,12 @@ class Plugin {
 	private function define_admin_hooks() {
 		$admin = new Admin( $this->version, $this->plugin_base_file );
 		$this->loader->add_action( 'admin_enqueue_scripts', $admin, 'enqueue_scripts' );
-
-
 	}
 
 	/**
-	 * Define all globally used fronend hooks.
+	 * This function is used to define certain global hooks used in the frontend, for example styles and scripts.
+	 * The Frontend class in includes/custom can be modified if you want to include more actions or filters globally
+	 * used in the frontend.
 	 *
 	 * @action wp_enqueue_scripts
 	 * @actionClass Frontend
@@ -113,11 +152,11 @@ class Plugin {
 	private function define_global_frontend_hooks() {
 		$fronend = new Frontend( $this->version, $this->plugin_base_file );
 		$this->loader->add_action( "wp_enqueue_scripts", $fronend, "enqueue_scripts" );
-
 	}
 
 	/**
-	 * Define all hooks used for plugin management.
+	 * This function is used to register the activation and deactivation hook, these hooks will use the functions in
+	 * the Setup class in includes/custom and can be modified as you wish.
 	 *
 	 * @action activation_hook
 	 * @action deactivation hook
@@ -130,38 +169,8 @@ class Plugin {
 	}
 
 	/**
-	 * Define all shortcodes
-	 *
-	 * @shortcode example_shortcode
-	 *
+	 * Run the plugin.
 	 */
-	private function define_shortcodes() {
-		$this->loader->add_shortcode( "example_shortcode", new Example_ShortcodeInterface() );
-	}
-
-	/**
-	 * Define all custom post types
-	 *
-	 * @hook init
-	 * @post_type Example
-	 * @post_supports title
-	 * @post_supports revisions
-	 * @post_supports thumbnail
-	 * @post_caps post
-	 * @showui options-page
-	 *
-	 * @TODO Define if you want to overwrite a single-template file.
-	 * @TODO Define if you want to overwrite a archive-template file.
-	 */
-	private function define_custom_post_types() {
-		/** @var Post_Type $example_post */
-		$example_post = $this->loader->add_post_type( "Example" );
-		$example_post->set_option( 'show_in_menu', Constants::PLUGIN_DASHBOARD_MAIN_MENU );
-		$example_post->set_option( "show_ui", true );
-		$example_post->set_supports( array( "title", "revisions", "thumbnail" ) );
-		$example_post->set_label( 'all_items', "Examples" );
-	}
-
 	public function run() {
 		$this->loader->run();
 	}

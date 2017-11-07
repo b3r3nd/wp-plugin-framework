@@ -14,11 +14,18 @@ if ( ! defined( 'WPINC' ) ) {
 
 require_once( 'includes/class-constants.php' );
 require_once( "includes/class-plugin.php" );
-require_once( 'includes/framework/interface-shortcode.php' );
-require_once('includes/framework/interface-menu.php');
+require_once( 'includes/framework/interfaces/interface-shortcode.php' );
+require_once('includes/framework/interfaces/interface-menu.php');
 require_once( 'includes/framework/entities/class-post-type.php' );
 require_once( 'includes/framework/entities/class-menu.php' );
+require_once('includes/framework/entities/class-option.php');
+require_once('includes/framework/entities/class-taxonomy.php');
 require_once( 'includes/framework/class-loader.php' );
+require_once('includes/framework/class-options-page.php');
+
+function plugin_dir() {
+	return __DIR__;
+}
 
 function run_plugin() {
 	$plugin = new Main\Plugin( __FILE__ );
