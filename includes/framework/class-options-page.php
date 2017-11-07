@@ -1,9 +1,4 @@
 <?php
-/**
- * @Author: ComSi
- * @Date: 6-11-17
- * @Time: 16:22
- */
 
 namespace Main\Framework;
 

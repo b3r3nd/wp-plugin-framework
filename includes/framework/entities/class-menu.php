@@ -1,6 +1,11 @@
 <?php
 
 namespace Main\Framework\Entities;
+/**
+ * Class Menu
+ *
+ * @package Main\Framework\Entities
+ */
 class Menu {
 	private $page_title;
 	private $menu_title;
@@ -19,13 +24,13 @@ class Menu {
 	 * @param string $menu_title
 	 * @param string $capability
 	 * @param string $menu_slug
-	 * @param $menu_object
+	 * @param        $menu_object
 	 * @param string $icon_url
 	 * @param int    $postion
 	 * @param bool   $is_sub_menu
 	 * @param string $parent_menu_slug
 	 */
-	function __construct( $page_title = "", $menu_title= "", $capability= "", $menu_slug= "", $menu_object, $icon_url, $postion, $is_sub_menu= false, $parent_menu_slug= "") {
+	function __construct( $page_title = "", $menu_title = "", $capability = "", $menu_slug = "", $menu_object, $icon_url, $postion, $is_sub_menu = false, $parent_menu_slug = "" ) {
 		$this->page_title       = $page_title;
 		$this->menu_title       = $menu_title;
 		$this->capability       = $capability;
@@ -101,7 +106,7 @@ class Menu {
 	}
 
 	/**
-	 * @param string $function
+	 * @param $menu_object
 	 */
 	public function setMenuobject( $menu_object ) {
 		$this->menu_object = $menu_object;
@@ -162,6 +167,4 @@ class Menu {
 	public function setParentMenuSlug( $parent_menu_slug ) {
 		$this->parent_menu_slug = $parent_menu_slug;
 	}
-
-
 }

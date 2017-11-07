@@ -1,12 +1,11 @@
 <?php
-/**
- * @Author: ComSi
- * @Date: 27-10-17
- * @Time: 16:21
- */
 
 namespace Main\Framework;
+/**
+ * Interface Shortcode_Interface
+ *
+ * @package Main\Framework
+ */
 interface Shortcode_Interface {
-
-	public function shortcode($attrs);
+	public function shortcode( $attrs );
 }

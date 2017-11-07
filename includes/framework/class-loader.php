@@ -10,6 +10,8 @@ use Main\Framework\Entities\Taxonomy;
 
 /**
  * Loader class, used to register all actions, filters, post types, taxonomies, shortcodes, menu pages and settings.
+ *
+ * @package Main\Framework
  */
 class Loader {
 	protected $actions;
@@ -38,7 +40,7 @@ class Loader {
 		if ( Constants::ALLOW_SINGLE_TEMPLATE_FILES ) {
 			$this->add_filter( "single_template", $this, "register_single_template" );
 		}
-		if(Constants::ALLOW_ARCHIVE_TEMPLATE_FILES) {
+		if ( Constants::ALLOW_ARCHIVE_TEMPLATE_FILES ) {
 			$this->add_filter( "archive_template", $this, "register_archive_template" );
 
 		}

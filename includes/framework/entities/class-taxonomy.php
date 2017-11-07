@@ -1,11 +1,11 @@
 <?php
-/**
- * @Author: ComSi
- * @Date: 7-11-17
- * @Time: 8:32
- */
 
 namespace Main\Framework\Entities;
+/**
+ * Class Taxonomy
+ *
+ * @package Main\Framework\Entities
+ */
 class Taxonomy {
 	private $taxonomy;
 	private $post_type;
@@ -65,5 +65,4 @@ class Taxonomy {
 	public function setArgs( $args ) {
 		$this->args = $args;
 	}
-
 }

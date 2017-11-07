@@ -4,6 +4,7 @@ namespace Main;
 /**
  * We use the Constants Class to define some values used on multiple locations to keep it easy to modify.
  *
+ * @package Main
  */
 class Constants {
 	/**

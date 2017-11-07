@@ -1,11 +1,11 @@
 <?php
-/**
- * @Author: ComSi
- * @Date: 27-10-17
- * @Time: 15:24
- */
 
 namespace Main\Framework\Entities;
+/**
+ * Class Post_Type
+ *
+ * @package Main\Framework\Entities
+ */
 class Post_Type {
 	private $post_type;
 	private $labels;
@@ -26,26 +26,26 @@ class Post_Type {
 	 * @param array  $supports
 	 */
 	public function __construct( $post_type = "", $labels = array(), $options = array(), $capabilities = array(), $supports = array() ) {
-		$this->post_type    = $post_type;
-		$this->labels       = $labels;
-		$this->capabilities = $capabilities;
-		$this->supports     = $supports;
-		$this->options      = $options;
-		$this->single_template = false;
+		$this->post_type        = $post_type;
+		$this->labels           = $labels;
+		$this->capabilities     = $capabilities;
+		$this->supports         = $supports;
+		$this->options          = $options;
+		$this->single_template  = false;
 		$this->archive_template = false;
 	}
 
 	/**
 	 * @param $location
 	 */
-	public function set_single_template($location) {
+	public function set_single_template( $location ) {
 		$this->single_template = $location;
 	}
 
 	/**
 	 * @param $location
 	 */
-	public function set_archive_template($location) {
+	public function set_archive_template( $location ) {
 		$this->archive_template = $location;
 	}
 
@@ -63,14 +63,12 @@ class Post_Type {
 		return $this->archive_template;
 	}
 
-
-
 	/**
 	 * @param $taxonomy String
 	 * @param $args array
 	 */
-	public function add_taxonomy($taxonomy, $args = array()) {
-		$taxonomyObj = new Taxonomy($taxonomy, $this->get_post_type(), $args);
+	public function add_taxonomy( $taxonomy, $args = array() ) {
+		$taxonomyObj        = new Taxonomy( $taxonomy, $this->get_post_type(), $args );
 		$this->taxonomies[] = $taxonomyObj;
 	}
 
@@ -83,6 +81,7 @@ class Post_Type {
 
 	/**
 	 * Used to quickly get all the args for the register_post_type function.
+	 *
 	 * @return array
 	 */
 	public function get_args() {
@@ -91,9 +90,8 @@ class Post_Type {
 			'capabilities' => $this->capabilities,
 			'supports'     => $this->supports,
 		);
-
-		foreach($this->options as $option=>$value) {
-			$args[$option] = $value;
+		foreach ( $this->options as $option => $value ) {
+			$args[ $option ] = $value;
 		}
 
 		return $args;

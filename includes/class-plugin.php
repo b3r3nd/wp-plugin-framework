@@ -17,6 +17,7 @@ use Main\Framework\Loader;
  *
  * For smaller plug-ins including it all in one file like this is fine.
  *
+ * @package Main
  */
 class Plugin {
 	/** @var  $loader Loader */
@@ -118,14 +119,16 @@ class Plugin {
 		$example_post = $this->loader->add_post_type( "Example" );
 		//$example_post->set_option( 'show_in_menu', Constants::PLUGIN_DASHBOARD_MAIN_MENU ); // Add it to plugin menu
 		$example_post->set_option( "show_ui", true );
-		$example_post->set_options(array('public' => true, "has_archive" => true));
+		$example_post->set_options( array( 'public' => true, "has_archive" => true ) );
 		$example_post->set_supports( array( "title", "revisions", "thumbnail" ) );
-		$example_post->set_labels(array("all_items" => "Examples", "name" => "Example", "singular_name" => "Example"));
-		$example_post->add_taxonomy("taxonomy_test", array("label" => "Test Taxonomy"));
-		$example_post->set_single_template( plugin_dir() . "/includes/custom/templates/single-example.php");
-		$example_post->set_archive_template( plugin_dir() . "/includes/custom/templates/archive-example.php");
+		$example_post->set_labels( array( "all_items"     => "Examples",
+		                                  "name"          => "Example",
+		                                  "singular_name" => "Example"
+		) );
+		$example_post->add_taxonomy( "taxonomy_test", array( "label" => "Test Taxonomy" ) );
+		$example_post->set_single_template( plugin_dir() . "/includes/custom/templates/single-example.php" );
+		$example_post->set_archive_template( plugin_dir() . "/includes/custom/templates/archive-example.php" );
 	}
-
 
 	/**
 	 * This function is used to define the admin hooks, in this case just to register scripts and styles in the

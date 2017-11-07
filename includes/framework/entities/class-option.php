@@ -1,11 +1,11 @@
 <?php
-/**
- * @Author: ComSi
- * @Date: 6-11-17
- * @Time: 16:48
- */
 
 namespace Main\Framework\Entities;
+/**
+ * Class Option
+ *
+ * @package Main\Framework\Entities
+ */
 class Option {
 	private $name;
 	private $type;

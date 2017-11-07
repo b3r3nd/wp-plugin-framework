@@ -1,9 +1,14 @@
 <?php
+
 namespace Main\Custom;
+
 use Main\Constants;
+
 /**
  * The Frontend Class handles all basic actions on the frontend, for example registering styles, or changing certain
  * items on certain pages.
+ *
+ * @package Main\Custom
  */
 class Frontend {
 	private $version;
@@ -14,7 +19,7 @@ class Frontend {
 	 * @param $plugin_base_file
 	 */
 	public function __construct( $version, $plugin_base_file ) {
-		$this->version = $version;
+		$this->version          = $version;
 		$this->plugin_base_file = $plugin_base_file;
 	}
 
