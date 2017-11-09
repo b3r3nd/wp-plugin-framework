@@ -15,6 +15,7 @@ class Post_Type {
 	private $taxonomies;
 	private $single_template;
 	private $archive_template;
+	private $post_object;
 
 	/**
 	 * Post_Type constructor.
@@ -33,8 +34,28 @@ class Post_Type {
 		$this->options          = $options;
 		$this->single_template  = false;
 		$this->archive_template = false;
+		$this->post_object = false;
 	}
 
+	public function has_custom_class() {
+		if(!$this->post_object) {
+			return false;
+		}
+		return true;
+	}
+	/**
+	 * @param $post_object
+	 */
+	public function set_post_object($post_object) {
+		$this->post_object = $post_object;
+	}
+
+	/**
+	 * @return mixed
+	 */
+	public function get_post_object() {
+		return $this->post_object;
+	}
 	/**
 	 * @param $location
 	 */

@@ -46,4 +46,5 @@ class Constants {
 	const REGISTER_TAXONOMIES          = true;
 	const ALLOW_SINGLE_TEMPLATE_FILES  = false;
 	const ALLOW_ARCHIVE_TEMPLATE_FILES = false;
+	const ALLOW_CUSTOM_POST_CLASS      = true;
 }

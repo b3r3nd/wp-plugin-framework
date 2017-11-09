@@ -3,6 +3,7 @@
 namespace Main;
 
 use Main\Custom\Admin;
+use Main\Custom\Custom_Post_Types\Test;
 use Main\Custom\Frontend;
 use Main\Custom\Menus\Main_Menu;
 use Main\Custom\Menus\Sub_Menu;
@@ -36,6 +37,7 @@ class Plugin {
 		$this->plugin_slug      = Constants::PLUGIN_NAME;
 		$this->version          = Constants::PLUGIN_VERSION;
 		$this->plugin_base_file = $plugin_base_file;
+		$this->loader = new Loader();
 		$this->load_dependencies();
 		$this->define_required_plugins();
 		$this->define_setup_hooks();
@@ -45,6 +47,7 @@ class Plugin {
 		$this->define_custom_post_types();
 		$this->define_menus();
 		$this->define_plugin_options();
+
 	}
 
 	/**
@@ -58,7 +61,7 @@ class Plugin {
 		require_once( 'custom/shortcodes/class-example-shortcode.php' );
 		require_once( 'custom/menus/class-main-menu.php' );
 		require_once( 'custom/menus/class-sub-menu.php' );
-		$this->loader = new Loader();
+		require_once('custom/custom-post-types/class-test.php');
 	}
 
 	/**
@@ -116,18 +119,19 @@ class Plugin {
 	 */
 	private function define_custom_post_types() {
 		/** @var Post_Type $example_post */
-		$example_post = $this->loader->add_post_type( "Example" );
+		$example_post = $this->loader->add_post_type( "Test" );
 		//$example_post->set_option( 'show_in_menu', Constants::PLUGIN_DASHBOARD_MAIN_MENU ); // Add it to plugin menu
 		$example_post->set_option( "show_ui", true );
 		$example_post->set_options( array( 'public' => true, "has_archive" => true ) );
 		$example_post->set_supports( array( "title", "revisions", "thumbnail" ) );
-		$example_post->set_labels( array( "all_items"     => "Examples",
-		                                  "name"          => "Example",
-		                                  "singular_name" => "Example"
+		$example_post->set_labels( array( "all_items"     => "Tests",
+		                                  "name"          => "Test",
+		                                  "singular_name" => "Test"
 		) );
 		$example_post->add_taxonomy( "taxonomy_test", array( "label" => "Test Taxonomy" ) );
 		$example_post->set_single_template( plugin_dir() . "/includes/custom/templates/single-example.php" );
 		$example_post->set_archive_template( plugin_dir() . "/includes/custom/templates/archive-example.php" );
+		$example_post->set_post_object(new Test());
 	}
 
 	/**

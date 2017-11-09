@@ -111,9 +111,11 @@ class Loader {
 	 * @param $hook
 	 * @param $component
 	 * @param $callback
+	 * @param $priority
+	 * @param $accepted_args
 	 */
-	public function add_action( $hook, $component, $callback ) {
-		$this->actions = $this->add( $this->actions, $hook, $component, $callback );
+	public function add_action( $hook, $component, $callback, $priority = 10, $accepted_args = 1 ) {
+		$this->actions = $this->add( $this->actions, $hook, $component, $callback, $priority, $accepted_args );
 	}
 
 	/**
@@ -122,9 +124,11 @@ class Loader {
 	 * @param $hook
 	 * @param $component
 	 * @param $callback
+	 * @param $priority
+	 * @param $accepted_args
 	 */
-	public function add_filter( $hook, $component, $callback ) {
-		$this->filters = $this->add( $this->filters, $hook, $component, $callback );
+	public function add_filter( $hook, $component, $callback, $priority = 10, $accepted_args = 1 ) {
+		$this->filters = $this->add( $this->filters, $hook, $component, $callback, $priority, $accepted_args  );
 	}
 
 	/**
@@ -134,14 +138,18 @@ class Loader {
 	 * @param $hook
 	 * @param $component
 	 * @param $callback
+	 * @param $priority
+	 * @param $accepted_args
 	 *
 	 * @return array
 	 */
-	private function add( $hooks, $hook, $component, $callback ) {
+	private function add( $hooks, $hook, $component, $callback, $priority, $accepted_args ) {
 		$hooks[] = array(
 			'hook'      => $hook,
 			'component' => $component,
-			'callback'  => $callback
+			'callback'  => $callback,
+		    'priority' => $priority,
+		    'accepted_args' => $accepted_args
 		);
 
 		return $hooks;
@@ -154,14 +162,17 @@ class Loader {
 	 * @hook plugin_init
 	 */
 	public function run() {
+		if ( Constants::ALLOW_CUSTOM_POST_CLASS ) {
+			$this->register_post_wrapper();
+		}
 		if ( Constants::REGISTER_FILTERS ) {
 			foreach ( $this->filters as $hook ) {
-				add_filter( $hook['hook'], array( $hook['component'], $hook['callback'] ) );
+				add_filter( $hook['hook'], array( $hook['component'], $hook['callback']), $hook['priority'], $hook['accepted_args']  );
 			}
 		}
 		if ( Constants::REGISTER_ACTIONS ) {
 			foreach ( $this->actions as $hook ) {
-				add_action( $hook['hook'], array( $hook['component'], $hook['callback'] ) );
+				add_action( $hook['hook'], array( $hook['component'], $hook['callback']), $hook['priority'], $hook['accepted_args']  );
 			}
 		}
 		if ( Constants::REGISTER_SHORTCODES ) {
@@ -174,6 +185,7 @@ class Loader {
 				register_setting( Constants::PLUGIN_OPTIONS_GROUP, $plugin_setting->getName() );
 			}
 		}
+
 	}
 
 	/**
@@ -252,6 +264,19 @@ class Loader {
 		}
 
 		return $archive_template;
+	}
+
+	/**
+	 * This functions registers the actions for custom post types. They refer to a wrapper class which from there
+	 * will call the right function in the custom post class (if enabled).
+	 */
+	public function register_post_wrapper() {
+		$post_wrapper = new Post_Wrapper($this->post_types);
+		$this->add_action( "save_post", $post_wrapper, "save_post", 10, 2 );
+		$this->add_action( "wp_trash_post", $post_wrapper, "trash_post", 10, 1 );
+		$this->add_action( "before_delete_post", $post_wrapper, "before_delete_post", 10, 1 );
+		$this->add_action( "untrash_post", $post_wrapper, "untrash_post", 10, 1 );
+		$this->add_action("transition_post_status", $post_wrapper, "transition_post_status", 10, 3);
 	}
 
 	/**
