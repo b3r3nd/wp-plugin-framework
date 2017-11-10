@@ -178,6 +178,9 @@ class Loader {
 	/**
 	 * Read the actions and filters defined by this plugin.
 	 *
+	 * @TODO Hooks, filters, shortcodes and plugin options should have their own
+	 * functions in which they will be loaded, its ads to the abstraction of the
+	 * code.
 	 * @hook plugin_init
 	 */
 	public function run() {
