@@ -21,4 +21,6 @@ interface Custom_Post_Interface {
 
 	public function transition_post_status($new_status, $old_status, $post);
 
+
+
 }

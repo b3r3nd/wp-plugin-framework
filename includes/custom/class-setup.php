@@ -2,7 +2,7 @@
 
 namespace Main\Custom;
 
-use Main\Constants;
+use Main\Plugin;
 
 /**
  * Plugin Setup Class. Here everything related to activation and deactivation of the plugin is handled.
@@ -23,7 +23,7 @@ class Setup {
 	 */
 	public function activate() {
 		if ( ! $this->required_plugins_installed() ) {
-			wp_die( __( "Please install all the required plugins", Constants::PLUGIN_LANGUAGE_DOMAIN ) );
+			wp_die( __( "Please install all the required plugins", Plugin::LANGUAGE_DOMAIN ) );
 		}
 	}
 

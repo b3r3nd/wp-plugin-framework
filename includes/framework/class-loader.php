@@ -2,11 +2,14 @@
 
 namespace Main\Framework;
 
-use Main\Constants;
+use Main\Plugin;
+use Main\Custom\Scripts;
 use Main\Framework\Entities\Menu;
 use Main\Framework\Entities\Option;
 use Main\Framework\Entities\Post_Type;
 use Main\Framework\Entities\Taxonomy;
+use Main\Custom\Setup;
+use Main\Plugin_Main;
 
 /**
  * Loader class, used to register all actions, filters, post types, taxonomies, shortcodes, menu pages and settings.
@@ -23,26 +26,42 @@ class Loader {
 	protected $plugin_options;
 	protected $admin_scripts;
 	protected $frontend_scripts;
+	protected $plugin;
 
 	/**
 	 * Loader constructor.
+	 *
+	 * @param $plugin
 	 */
-	public function __construct() {
-		$this->actions        = array();
-		$this->filters        = array();
-		$this->post_types     = array();
-		$this->taxonomies     = array();
-		$this->shortcodes     = array();
-		$this->menu_pages     = array();
-		$this->plugin_options = array();
+	public function __construct($plugin ) {
+		/** @var  $plugin Plugin_Main */
+		$this->actions          = array();
+		$this->filters          = array();
+		$this->post_types       = array();
+		$this->taxonomies       = array();
+		$this->shortcodes       = array();
+		$this->menu_pages       = array();
+		$this->plugin_options   = array();
+		$this->plugin = $plugin;
+
 		$this->add_action( "init", $this, "wordpress_init" );
 		$this->add_action( "admin_menu", $this, "register_menus" );
-		if ( Constants::ALLOW_SINGLE_TEMPLATE_FILES ) {
+		if ( Plugin::ALLOWS_SINGLE_TEMPLATE_FILE ) {
 			$this->add_filter( "single_template", $this, "register_single_template" );
 		}
-		if ( Constants::ALLOW_ARCHIVE_TEMPLATE_FILES ) {
+		if ( Plugin::ALLOWS_ARCHIVE_TEMPLATE_FILE ) {
 			$this->add_filter( "archive_template", $this, "register_archive_template" );
-
+		}
+		if ( Plugin::ALLOWS_ADMIN_SCRIPTS ) {
+			$this->add_action( 'admin_enqueue_scripts', new Scripts( $plugin->get_version(), $plugin->get_plugin_base_file() ), 'admin_enqueue_scripts' );
+		}
+		if ( Plugin::ALLOWS_FRONTEND_SCRIPTS ) {
+			$this->add_action( "wp_enqueue_scripts", new Scripts( $plugin->get_version(), $plugin->get_plugin_base_file() ), "frontend_enqueue_scripts" );
+		}
+		if(Plugin::ALLOWS_SETUP_HOOKS) {
+			$setup = new Setup( $plugin->get_required_plugins() );
+			register_activation_hook( $plugin->get_plugin_base_file(), array( $setup, 'activate' ) );
+			register_deactivation_hook( $plugin->get_plugin_base_file(), array( $setup, 'deactivate' ) );
 		}
 	}
 
@@ -128,7 +147,7 @@ class Loader {
 	 * @param $accepted_args
 	 */
 	public function add_filter( $hook, $component, $callback, $priority = 10, $accepted_args = 1 ) {
-		$this->filters = $this->add( $this->filters, $hook, $component, $callback, $priority, $accepted_args  );
+		$this->filters = $this->add( $this->filters, $hook, $component, $callback, $priority, $accepted_args );
 	}
 
 	/**
@@ -145,11 +164,11 @@ class Loader {
 	 */
 	private function add( $hooks, $hook, $component, $callback, $priority, $accepted_args ) {
 		$hooks[] = array(
-			'hook'      => $hook,
-			'component' => $component,
-			'callback'  => $callback,
-		    'priority' => $priority,
-		    'accepted_args' => $accepted_args
+			'hook'          => $hook,
+			'component'     => $component,
+			'callback'      => $callback,
+			'priority'      => $priority,
+			'accepted_args' => $accepted_args
 		);
 
 		return $hooks;
@@ -162,27 +181,33 @@ class Loader {
 	 * @hook plugin_init
 	 */
 	public function run() {
-		if ( Constants::ALLOW_CUSTOM_POST_CLASS ) {
+		if ( Plugin::ALLOWS_CUSTOM_POST_CLASS ) {
 			$this->register_post_wrapper();
 		}
-		if ( Constants::REGISTER_FILTERS ) {
+		if ( Plugin::ALLOWS_FILTERS ) {
 			foreach ( $this->filters as $hook ) {
-				add_filter( $hook['hook'], array( $hook['component'], $hook['callback']), $hook['priority'], $hook['accepted_args']  );
+				add_filter( $hook['hook'], array(
+					$hook['component'],
+					$hook['callback']
+				), $hook['priority'], $hook['accepted_args'] );
 			}
 		}
-		if ( Constants::REGISTER_ACTIONS ) {
+		if ( Plugin::ALLOWS_ACTIONS ) {
 			foreach ( $this->actions as $hook ) {
-				add_action( $hook['hook'], array( $hook['component'], $hook['callback']), $hook['priority'], $hook['accepted_args']  );
+				add_action( $hook['hook'], array(
+					$hook['component'],
+					$hook['callback']
+				), $hook['priority'], $hook['accepted_args'] );
 			}
 		}
-		if ( Constants::REGISTER_SHORTCODES ) {
+		if ( Plugin::ALLOWS_SHORTCODES ) {
 			foreach ( $this->shortcodes as $shortcode => $class ) {
 				add_shortcode( $shortcode, array( $class, "shortcode" ) );
 			}
 		}
-		if ( Constants::REGISTER_PLUGIN_OPTIONS ) {
+		if ( Plugin::ALLOWS_PLUGIN_OPTIONS ) {
 			foreach ( $this->plugin_options as $plugin_setting ) {
-				register_setting( Constants::PLUGIN_OPTIONS_GROUP, $plugin_setting->getName() );
+				register_setting( Plugin::OPTIONS_GROUP, $plugin_setting->getName() );
 			}
 		}
 
@@ -197,7 +222,7 @@ class Loader {
 		/**
 		 * @var Menu $menu_obj
 		 */
-		if ( Constants::REGISTER_MAIN_MENU_PAGE ) {
+		if ( Plugin::ALLOWS_MAIN_MENU_PAGE ) {
 			foreach ( $this->menu_pages as $menu_slug => $menu_obj ) {
 				add_menu_page( $menu_obj->getPageTitle(), $menu_obj->getMenuTitle(), $menu_obj->getCapability(), $menu_obj->getMenuSlug(), array(
 					$menu_obj->getCLass(),
@@ -205,7 +230,7 @@ class Loader {
 				), $menu_obj->getIconUrl(), $menu_obj->getPostion() );
 			}
 		}
-		if ( Constants::REGISTER_SUB_MENU_PAGE ) {
+		if ( Plugin::ALLOWS_SUB_MENU_PAGE ) {
 			foreach ( $this->sub_menu_pages as $menu_slug => $menu_obj ) {
 				add_submenu_page( $menu_obj->getParentMenuSlug(), $menu_obj->getPageTitle(), $menu_obj->getMenuTitle(), $menu_obj->getCapability(), $menu_obj->getMenuSlug(), array(
 					$menu_obj->getCLass(),
@@ -213,9 +238,9 @@ class Loader {
 				) );
 			}
 		}
-		if ( Constants::REGISTER_OPTIONS_PAGE ) {
+		if ( Plugin::ALLOWS_OPTIONS_PAGE ) {
 			$options_page = new Options_page( $this->plugin_options );
-			add_options_page( Constants::PLUGIN_OPTIONS_PAGE_TITLE, Constants::PLUGIN_OPTIONS_MENU_TITLE, "administrator", Constants::PLUGIN_OPTIONS_MENU_SLUG, array(
+			add_options_page( Plugin::OPTIONS_PAGE_TITLE, Plugin::OPTIONS_MENU_TITLE, "administrator", Plugin::OPTIONS_MENU_SLUG, array(
 				$options_page,
 				"menu_page"
 			) );
@@ -271,12 +296,12 @@ class Loader {
 	 * will call the right function in the custom post class (if enabled).
 	 */
 	public function register_post_wrapper() {
-		$post_wrapper = new Post_Wrapper($this->post_types);
+		$post_wrapper = new Post_Wrapper( $this->post_types );
 		$this->add_action( "save_post", $post_wrapper, "save_post", 10, 2 );
 		$this->add_action( "wp_trash_post", $post_wrapper, "trash_post", 10, 1 );
 		$this->add_action( "before_delete_post", $post_wrapper, "before_delete_post", 10, 1 );
 		$this->add_action( "untrash_post", $post_wrapper, "untrash_post", 10, 1 );
-		$this->add_action("transition_post_status", $post_wrapper, "transition_post_status", 10, 3);
+		$this->add_action( "transition_post_status", $post_wrapper, "transition_post_status", 10, 3 );
 	}
 
 	/**
@@ -286,14 +311,16 @@ class Loader {
 	 * @hook init - runs when WordPress is first initialized
 	 */
 	public function wordpress_init() {
-		if ( Constants::REGISTER_CUSTOM_POST_TYPES ) {
+		if ( Plugin::ALLOWS_CUSTOM_POST_TYPES ) {
 			foreach ( $this->post_types as $post_type ) {
 				/** @var $post_type Post_Type */
 				register_post_type( $post_type->get_post_type(), $post_type->get_args() );
-				if ( Constants::REGISTER_TAXONOMIES ) {
-					foreach ( $post_type->get_taxonomies() as $taxonomy ) {
-						/** @var $taxonomy Taxonomy */
-						register_taxonomy( $taxonomy->getTaxonomy(), $taxonomy->getPostType(), $taxonomy->getArgs() );
+				if ( Plugin::ALLOWS_TAXONOMIES ) {
+					if ( $post_type->get_taxonomies() !== false ) {
+						foreach ( $post_type->get_taxonomies() as $taxonomy ) {
+							/** @var $taxonomy Taxonomy */
+							register_taxonomy( $taxonomy->getTaxonomy(), $taxonomy->getPostType(), $taxonomy->getArgs() );
+						}
 					}
 				}
 			}

@@ -2,7 +2,7 @@
 
 namespace Main\Framework;
 
-use Main\Constants;
+use Main\Plugin;
 use Main\Framework\Entities\Option;
 
 /**
@@ -31,11 +31,11 @@ class Options_page implements Menu_Interface {
 		?>
         <form method="post" action="options.php">
 			<?php
-			settings_fields( Constants::PLUGIN_OPTIONS_GROUP );
-			do_settings_sections( Constants::PLUGIN_OPTIONS_GROUP );
+			settings_fields( Plugin::OPTIONS_GROUP );
+			do_settings_sections( Plugin::OPTIONS_GROUP );
 			?>
             <div class="wrap">
-                <h1><?php echo Constants::PLUGIN_OPTIONS_PAGE_TITLE ?></h1>
+                <h1><?php echo Plugin::OPTIONS_PAGE_TITLE ?></h1>
                 <table class="form-table">
                     <tbody>
 					<?php

@@ -35,6 +35,7 @@ class Post_Type {
 		$this->single_template  = false;
 		$this->archive_template = false;
 		$this->post_object = false;
+		$this->taxonomies = false;
 	}
 
 	public function has_custom_class() {
