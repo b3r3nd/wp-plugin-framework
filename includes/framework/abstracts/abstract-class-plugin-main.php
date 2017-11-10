@@ -1,8 +1,6 @@
 <?php
 
-namespace Main\Framework;
-
-use Main\Plugin;
+namespace Main\Framework\Abstracts;
 
 /**
  * Class Abstract_Plugin_Main

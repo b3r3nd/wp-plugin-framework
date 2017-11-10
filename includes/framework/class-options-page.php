@@ -3,7 +3,7 @@
 namespace Main\Framework;
 
 use Main\Plugin;
-use Main\Framework\Entities\Option;
+use Main\Framework\Classes\Option;
 
 /**
  * Class Options_page

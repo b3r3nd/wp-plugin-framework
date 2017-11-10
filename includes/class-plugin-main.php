@@ -6,8 +6,8 @@ use Main\Custom\Custom_Post_Types\Test;
 use Main\Custom\Menus\Main_Menu;
 use Main\Custom\Menus\Sub_Menu;
 use Main\Custom\Shortcodes\Example_Shortcode;
-use Main\Framework\Abstract_Plugin_Main;
-use Main\Framework\Entities\Post_Type;
+use Main\Framework\Abstracts\Abstract_Plugin_Main;
+use Main\Framework\Classes\Post_Type;
 use Main\Framework\Loader;
 
 /**
@@ -50,7 +50,7 @@ class Plugin_Main extends Abstract_Plugin_Main {
 		require_once( 'custom/shortcodes/class-example-shortcode.php' );
 		require_once( 'custom/menus/class-main-menu.php' );
 		require_once( 'custom/menus/class-sub-menu.php' );
-		require_once( 'custom/custom-post-types/class-test.php' );
+		require_once( 'custom/post-types/class-test.php' );
 	}
 
 	/**

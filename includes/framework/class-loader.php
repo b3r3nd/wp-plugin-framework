@@ -4,10 +4,10 @@ namespace Main\Framework;
 
 use Main\Plugin;
 use Main\Custom\Scripts;
-use Main\Framework\Entities\Menu;
-use Main\Framework\Entities\Option;
-use Main\Framework\Entities\Post_Type;
-use Main\Framework\Entities\Taxonomy;
+use Main\Framework\Classes\Menu;
+use Main\Framework\Classes\Option;
+use Main\Framework\Classes\Post_Type;
+use Main\Framework\Classes\Taxonomy;
 use Main\Custom\Setup;
 use Main\Plugin_Main;
 

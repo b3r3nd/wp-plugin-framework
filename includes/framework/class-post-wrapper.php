@@ -2,7 +2,7 @@
 
 namespace Main\Framework;
 
-use Main\Framework\Entities\Post_Type;
+use Main\Framework\Classes\Post_Type;
 
 /**
  * Class Post_Wrapper

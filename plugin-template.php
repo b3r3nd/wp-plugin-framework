@@ -12,15 +12,15 @@ if ( ! defined( 'WPINC' ) ) {
 	die;
 }
 require_once( 'includes/class-plugin.php' );
-require_once('includes/framework/abstract-class-plugin-main.php');
+require_once('includes/framework/abstracts/abstract-class-plugin-main.php');
 require_once( "includes/class-plugin-main.php" );
 require_once( 'includes/framework/interfaces/interface-shortcode.php' );
 require_once( 'includes/framework/interfaces/interface-menu.php' );
 require_once( 'includes/framework/interfaces/interface-custom-post.php' );
-require_once( 'includes/framework/entities/class-post-type.php' );
-require_once( 'includes/framework/entities/class-menu.php' );
-require_once( 'includes/framework/entities/class-option.php' );
-require_once( 'includes/framework/entities/class-taxonomy.php' );
+require_once( 'includes/framework/classes/class-post-type.php' );
+require_once( 'includes/framework/classes/class-menu.php' );
+require_once( 'includes/framework/classes/class-option.php' );
+require_once( 'includes/framework/classes/class-taxonomy.php' );
 require_once( 'includes/framework/class-loader.php' );
 require_once( 'includes/framework/class-options-page.php' );
 require_once( 'includes/framework/class-post-wrapper.php' );

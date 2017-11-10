@@ -1,6 +1,6 @@
 <?php
 
-namespace Main\Framework\Entities;
+namespace Main\Framework\Classes;
 /**
  * Class Post_Type
  *
