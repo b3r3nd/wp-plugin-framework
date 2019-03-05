@@ -1,8 +1,3 @@
-# ComSi Plugin Template #
-This template is created to make it easier for us to setup small plugins for our customers without having to do the same
- stuff over and over again. Another intention is to give all our plug-in the same OOP layout and structure, this will also 
- make our life a lot easier! 
- 
 # Coding Standards #
  Please read the WordPress coding standards here: https://codex.wordpress.org/WordPress_Coding_Standards
 
