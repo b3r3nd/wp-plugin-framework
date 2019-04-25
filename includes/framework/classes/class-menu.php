@@ -5,6 +5,7 @@ namespace Main\Framework\Classes;
  * Class Menu
  *
  * @package Main\Framework\Entities
+ * @author Berend de Groot <berend@nugtr.nl>
  */
 class Menu {
 	private $page_title;
@@ -26,9 +27,11 @@ class Menu {
 	 * @param string $menu_slug
 	 * @param        $menu_object
 	 * @param string $icon_url
-	 * @param int    $postion
-	 * @param bool   $is_sub_menu
+	 * @param int $postion
+	 * @param bool $is_sub_menu
 	 * @param string $parent_menu_slug
+	 *
+	 * @author Berend de Groot <berend@nugtr.nl>
 	 */
 	function __construct( $page_title = "", $menu_title = "", $capability = "", $menu_slug = "", $menu_object, $icon_url, $postion, $is_sub_menu = false, $parent_menu_slug = "" ) {
 		$this->page_title       = $page_title;

@@ -2,8 +2,8 @@
 
 namespace Main\Framework;
 
-use Main\Plugin;
 use Main\Framework\Classes\Option;
+use Main\Plugin;
 
 /**
  * Class Options_page
@@ -11,6 +11,7 @@ use Main\Framework\Classes\Option;
  * This class will show all the options added by the plugin in the options page.
  *
  * @package Main\Framework
+ * @author Berend de Groot <berend@nugtr.nl>
  */
 class Options_page implements Menu_Interface {
 	private $plugin_options;
@@ -19,6 +20,8 @@ class Options_page implements Menu_Interface {
 	 * Options_page constructor.
 	 *
 	 * @param $plugin_options
+	 *
+	 * @author Berend de Groot <berend@nugtr.nl>
 	 */
 	public function __construct( $plugin_options ) {
 		$this->plugin_options = $plugin_options;
@@ -26,6 +29,7 @@ class Options_page implements Menu_Interface {
 
 	/**
 	 * Default options page
+	 * @author Berend de Groot <berend@nugtr.nl>
 	 */
 	public function menu_page() {
 		?>

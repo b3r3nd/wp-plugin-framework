@@ -9,6 +9,7 @@ namespace Main\Framework\Abstracts;
  * menus etc.
  *
  * @package Main\Framework
+ * @author Berend de Groot <berend@nugtr.nl>
  */
 abstract class  Abstract_Plugin_Main {
 	protected $version;

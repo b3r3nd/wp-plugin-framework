@@ -5,6 +5,7 @@ namespace Main\Framework\Classes;
  * Class Taxonomy
  *
  * @package Main\Framework\Entities
+ * @author Berend de Groot <berend@nugtr.nl>
  */
 class Taxonomy {
 	private $taxonomy;
@@ -17,6 +18,8 @@ class Taxonomy {
 	 * @param $taxonomy
 	 * @param $post_type
 	 * @param $args
+	 *
+	 * @author Berend de Groot <berend@nugtr.nl>
 	 */
 	public function __construct( $taxonomy, $post_type, $args = array() ) {
 		$this->taxonomy  = $taxonomy;

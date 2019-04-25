@@ -5,6 +5,7 @@ namespace Main\Framework\Classes;
  * Class Option
  *
  * @package Main\Framework\Entities
+ * @author Berend de Groot <berend@nugtr.nl>
  */
 class Option {
 	private $name;
@@ -17,6 +18,8 @@ class Option {
 	 * @param $name
 	 * @param $type
 	 * @param $label
+	 *
+	 * @author Berend de Groot <berend@nugtr.nl>
 	 */
 	public function __construct( $name, $type, $label ) {
 		$this->name  = $name;

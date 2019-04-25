@@ -5,6 +5,7 @@ namespace Main\Framework\Classes;
  * Class Post_Type
  *
  * @package Main\Framework\Entities
+ * @author Berend de Groot <berend@nugtr.nl>
  */
 class Post_Type {
 	private $post_type;
@@ -16,15 +17,18 @@ class Post_Type {
 	private $single_template;
 	private $archive_template;
 	private $post_object;
+	private $meta_boxes;
 
 	/**
 	 * Post_Type constructor.
 	 *
 	 * @param string $post_type
-	 * @param array  $labels
-	 * @param array  $options
-	 * @param array  $capabilities
-	 * @param array  $supports
+	 * @param array $labels
+	 * @param array $options
+	 * @param array $capabilities
+	 * @param array $supports
+	 *
+	 * @author Berend de Groot <berend@nugtr.nl>
 	 */
 	public function __construct( $post_type = "", $labels = array(), $options = array(), $capabilities = array(), $supports = array() ) {
 		$this->post_type        = $post_type;
@@ -34,21 +38,29 @@ class Post_Type {
 		$this->options          = $options;
 		$this->single_template  = false;
 		$this->archive_template = false;
-		$this->post_object = false;
-		$this->taxonomies = false;
+		$this->post_object      = false;
+		$this->taxonomies       = false;
+		$this->meta_boxes       = false;
 	}
 
+	/**
+	 * @return bool
+	 * @author Berend de Groot <berend@nugtr.nl>
+	 */
 	public function has_custom_class() {
-		if(!$this->post_object) {
+		if ( ! $this->post_object ) {
 			return false;
 		}
+
 		return true;
 	}
-	/**
-	 * @param $post_object
-	 */
-	public function set_post_object($post_object) {
-		$this->post_object = $post_object;
+
+	public function get_meta_boxes() {
+		return $this->meta_boxes;
+	}
+
+	public function set_meta_boxes( $meta_boxes ) {
+		$this->meta_boxes = $meta_boxes;
 	}
 
 	/**
@@ -57,18 +69,12 @@ class Post_Type {
 	public function get_post_object() {
 		return $this->post_object;
 	}
-	/**
-	 * @param $location
-	 */
-	public function set_single_template( $location ) {
-		$this->single_template = $location;
-	}
 
 	/**
-	 * @param $location
+	 * @param $post_object
 	 */
-	public function set_archive_template( $location ) {
-		$this->archive_template = $location;
+	public function set_post_object( $post_object ) {
+		$this->post_object = $post_object;
 	}
 
 	/**
@@ -79,10 +85,24 @@ class Post_Type {
 	}
 
 	/**
+	 * @param $location
+	 */
+	public function set_single_template( $location ) {
+		$this->single_template = $location;
+	}
+
+	/**
 	 * @return mixed
 	 */
 	public function get_archive_template() {
 		return $this->archive_template;
+	}
+
+	/**
+	 * @param $location
+	 */
+	public function set_archive_template( $location ) {
+		$this->archive_template = $location;
 	}
 
 	/**
@@ -97,6 +117,20 @@ class Post_Type {
 	/**
 	 * @return mixed
 	 */
+	public function get_post_type() {
+		return $this->post_type;
+	}
+
+	/**
+	 * @param string $post_type
+	 */
+	public function set_post_type( $post_type = "" ) {
+		$this->post_type = $post_type;
+	}
+
+	/**
+	 * @return mixed
+	 */
 	public function get_taxonomies() {
 		return $this->taxonomies;
 	}
@@ -105,6 +139,7 @@ class Post_Type {
 	 * Used to quickly get all the args for the register_post_type function.
 	 *
 	 * @return array
+	 * @author Berend de Groot <berend@nugtr.nl>
 	 */
 	public function get_args() {
 		$args = array(
@@ -117,20 +152,6 @@ class Post_Type {
 		}
 
 		return $args;
-	}
-
-	/**
-	 * @return mixed
-	 */
-	public function get_post_type() {
-		return $this->post_type;
-	}
-
-	/**
-	 * @param string $post_type
-	 */
-	public function set_post_type( $post_type = "" ) {
-		$this->post_type = $post_type;
 	}
 
 	/**

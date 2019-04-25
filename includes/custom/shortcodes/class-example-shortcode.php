@@ -7,8 +7,7 @@ use Main\Framework\Shortcode_Interface;
 /**
  * First Example Shortcode.
  *
- * @why As example
- * @usedFor a test page
+ * @author Berend de Groot <berend@nugtr.nl>
  */
 class Example_Shortcode implements Shortcode_Interface {
 	/**
