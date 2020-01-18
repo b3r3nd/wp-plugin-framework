@@ -1,3 +1,9 @@
+## Small Note
+This project was mostly developed in my free time but gave it both to my previous employer
+(ComSi) and current employer (NUGTR). The master branch is the version ComSi still has and the develop branch
+is the current version at NUGTR. I quit development in my free time because I am not 
+responsible for anything related to WordPress anymore.
+
 # Coding Standards #
  Please read the WordPress coding standards here: https://codex.wordpress.org/WordPress_Coding_Standards
 
