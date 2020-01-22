@@ -133,4 +133,20 @@ class Post_Wrapper {
 			$custom_class->untrash_post( $post_id );
 		}
 	}
+
+	/**
+	 * @return mixed
+	 * @author Berend de Groot <berend@nugtr.nl>
+	 */
+	public function get_post_types() {
+		return $this->post_types;
+	}
+
+	/**
+	 * @param $post_types
+	 * @author Berend de Groot <berend@nugtr.nl>
+	 */
+	public function set_post_types( $post_types ) {
+		$this->post_types = $post_types;
+	}
 }

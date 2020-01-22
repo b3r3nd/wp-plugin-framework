@@ -5,7 +5,7 @@ namespace Main\Framework\Classes;
  * Class Post_Type
  *
  * @package Main\Framework\Entities
- * @author Berend de Groot <berend@nugtr.nl>
+ * @author  Berend de Groot <berend@nugtr.nl>
  */
 class Post_Type {
 	private $post_type;
@@ -17,16 +17,15 @@ class Post_Type {
 	private $single_template;
 	private $archive_template;
 	private $post_object;
-	private $meta_boxes;
 
 	/**
 	 * Post_Type constructor.
 	 *
 	 * @param string $post_type
-	 * @param array $labels
-	 * @param array $options
-	 * @param array $capabilities
-	 * @param array $supports
+	 * @param array  $labels
+	 * @param array  $options
+	 * @param array  $capabilities
+	 * @param array  $supports
 	 *
 	 * @author Berend de Groot <berend@nugtr.nl>
 	 */
@@ -40,7 +39,6 @@ class Post_Type {
 		$this->archive_template = false;
 		$this->post_object      = false;
 		$this->taxonomies       = false;
-		$this->meta_boxes       = false;
 	}
 
 	/**
@@ -53,14 +51,6 @@ class Post_Type {
 		}
 
 		return true;
-	}
-
-	public function get_meta_boxes() {
-		return $this->meta_boxes;
-	}
-
-	public function set_meta_boxes( $meta_boxes ) {
-		$this->meta_boxes = $meta_boxes;
 	}
 
 	/**
@@ -107,7 +97,7 @@ class Post_Type {
 
 	/**
 	 * @param $taxonomy String
-	 * @param $args array
+	 * @param $args     array
 	 */
 	public function add_taxonomy( $taxonomy, $args = array() ) {
 		$taxonomyObj        = new Taxonomy( $taxonomy, $this->get_post_type(), $args );

@@ -45,9 +45,9 @@ class Options_page implements Menu_Interface {
 					<?php
 					foreach ( $this->plugin_options as $plugin_option ) {
 						/** @var $plugin_option Option */
-						$option_name  = $plugin_option->getName();
-						$option_label = $plugin_option->getLabel();
-						$option_type  = $plugin_option->getType();
+						$option_name  = $plugin_option->get_name();
+						$option_label = $plugin_option->get_label();
+						$option_type  = $plugin_option->get_type();
 						?>
                         <tr>
                             <th scope="row">

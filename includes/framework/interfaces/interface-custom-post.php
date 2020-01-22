@@ -5,10 +5,11 @@ namespace Main\Framework;
 /**
  * Interface Custom_Post_Interface
  *
- * This interface needs to be implemented by manually created classes for custom post types.
+ * This interface needs to be implemented by manually created classes for custom post types in order to enforce them
+ * using the proper hooks.
  *
  * @package Main\Framework
- * @author Berend de Groot <berend@nugtr.nl>
+ * @author  Berend de Groot <berend@nugtr.nl>
  */
 interface Custom_Post_Interface {
 

@@ -4,6 +4,11 @@ namespace Main\Custom;
 
 use Main\Plugin;
 
+/**
+ * Class Scripts
+ *
+ * @package Main\Custom
+ */
 class Scripts {
 	private $version;
 	private $plugin_base_file;
@@ -22,7 +27,7 @@ class Scripts {
 	/**
 	 * Enqueues styles used in the WP_ADMIN
 	 *
-	 * @hook admin_enqueue_styles
+	 * @hook   admin_enqueue_styles
 	 * @author Berend de Groot <berend@nugtr.nl>
 	 */
 	public function admin_enqueue_scripts() {
@@ -33,7 +38,7 @@ class Scripts {
 	/**
 	 * Enqueues styles used in the frontend of the website
 	 *
-	 * @hook wp_enqueue_styles
+	 * @hook   wp_enqueue_styles
 	 * @author Berend de Groot <berend@nugtr.nl>
 	 */
 	public function frontend_enqueue_scripts() {

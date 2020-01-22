@@ -3,15 +3,14 @@
 namespace Main\Framework\Loader;
 
 
-use Main\Framework\Loader;
+use Main\Framework\Abstracts\Loader_Abstract;
 
-class Shortcode_Loader {
-    private $loader;
-
-    public function __construct(Loader $loader)
-    {
-        $this->loader = $loader;
-    }
+/**
+ * Class Shortcode_Loader
+ *
+ * @package Main\Framework\Loader
+ */
+class Shortcode_Loader extends Loader_Abstract {
 
     /**
      * @author Berend de Groot <berend@nugtr.nl>

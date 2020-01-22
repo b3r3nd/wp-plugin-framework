@@ -16,7 +16,8 @@ More extensive documentation can be found on our Data disk -> WordPress folder -
 - 0.1 - Released Jan. 2017
 - 1.0 - Released Oct. 2017
 - 1.1 - Released Feb. 2018
-- 1.2 - Released Apr. 2019 (Current Master)
+- 1.2 - Released Apr. 2019 
+- 1.3 - Released Dec 2019 - Current Master
 
 ### Checklist after git clone
 * Change root folder name to desired plug-in name

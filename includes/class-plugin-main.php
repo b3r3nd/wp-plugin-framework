@@ -5,18 +5,24 @@ namespace Main;
 use Main\Custom\Custom_Post_Types\Test;
 use Main\Custom\Menus\Main_Menu;
 use Main\Custom\Menus\Sub_Menu;
+use Main\Custom\Meta_Box_Groups\Meta_Box_Group_1;
+use Main\Custom\Meta_Box_Groups\Meta_Box_Group_2;
 use Main\Framework\Abstracts\Abstract_Plugin_Main;
+use Main\Framework\Classes\Inputs\Meta_Box_Checkbox;
+use Main\Framework\Classes\Inputs\Meta_Box_Input;
+use Main\Framework\Classes\Inputs\Meta_Box_Radio;
+use Main\Framework\Classes\Meta_Box_Group;
 use Main\Framework\Classes\Post_Type;
 use Main\Framework\Loader;
 
 /**
- * Basic Plugin file were everything is loaded and configured. Keep in mind when adding more and more custom post types, shortcodes,
- * dependencies and other hooks that you start seperating each function in its own file.
+ * Basic Plugin file were everything is loaded and configured. Keep in mind when adding more and more custom post
+ * types, shortcodes, dependencies and other hooks that you start seperating each function in its own file.
  *
  * For smaller plug-ins including it all in one file like this is fine.
  *
  * @package Main
- * @author Berend de Groot <berend@nugtr.nl>
+ * @author  Berend de Groot <berend@nugtr.nl>
  */
 class Plugin_Main extends Abstract_Plugin_Main {
 	/** @var  $loader Loader */
@@ -46,19 +52,9 @@ class Plugin_Main extends Abstract_Plugin_Main {
 
 
 	/**
-	 * This function load all the required dependencies not added by the default framework, if you added a new class
-	 * please include it here.
-	 * @author Berend de Groot <berend@nugtr.nl>
-	 */
-	private function load_dependencies() {
-		require_once( 'custom/shortcodes/class-example-shortcode.php' );
-		require_once( 'custom/post-types/class-test.php' );
-	}
-
-	/**
 	 * This function is used to define plugin which need to be installed before this plugin can be activated.
 	 *
-	 * @usage array("gravityforms/gravityforms.php")
+	 * @usage  array("gravityforms/gravityforms.php")
 	 * @author Berend de Groot <berend@nugtr.nl>
 	 */
 	private function define_required_plugins() {
@@ -96,15 +92,15 @@ class Plugin_Main extends Abstract_Plugin_Main {
 		$example_post->set_option( 'show_in_menu', 1 );
 		$example_post->set_option( "show_ui", true );
 		$example_post->set_options( array( 'public' => true, "has_archive" => true ) );
-		$example_post->set_supports( array( "title", "revisions", "thumbnail" ) );
+		$example_post->set_supports( array( "title", "revisions", "thumbnail", "editor" ) );
 		$example_post->set_labels( array(
-			"all_items"     => "example",
+			"all_items"     => "all examples",
 			"name"          => "example",
 			"singular_name" => "example",
-			"new_item"      => "example",
-			"add_new"       => "example",
-			"add_item"      => "examplen",
-			"add_new_item"  => "example"
+			"new_item"      => "new example",
+			"add_new"       => "add example",
+			"add_item"      => "add example",
+			"add_new_item"  => "add new example"
 
 		) );
 		$example_post->set_single_template( plugin_dir() . "/includes/custom/templates/single-example.php" );
@@ -124,6 +120,29 @@ class Plugin_Main extends Abstract_Plugin_Main {
 				"hierarchical" => "false",
 			)
 		);
+
+		$meta_box1 = new Meta_Box_Input( 'extra1', 'Extra 1' );
+		$meta_box2 = new Meta_Box_Input( 'extra2', 'Extra 2' );
+
+
+		$meta_box3 = new Meta_Box_Checkbox( 'extra3', 'Extra 3' );
+		$meta_box3->set_options( array( 'check1', 'check2', 'check3' ) );
+
+		$meta_box4 = new Meta_Box_Radio( 'extra4', 'Extra 4' );
+		$meta_box4->set_options( array( 'radio1', 'radio2', 'radio3' ) );
+
+
+		$meta_box_group  = new Meta_Box_Group( 'Extra velden', $example_post, new Meta_Box_Group_1() );
+		$meta_box_group2 = new Meta_Box_Group( 'Extra velden 2', $example_post, new Meta_Box_Group_2() );
+
+		$meta_box_group->add_meta_box( [ $meta_box1, $meta_box2 ] );
+		$this->loader->add_meta_box_group( $meta_box_group );
+
+		$meta_box_group2->add_meta_box( [ $meta_box3, $meta_box4 ] );
+		$meta_box_group2->set_context( 'side' );
+		$this->loader->add_meta_box_group( $meta_box_group2 );
+
+
 	}
 
 	/**

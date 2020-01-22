@@ -17,7 +17,7 @@ class Test implements Custom_Post_Interface {
 	}
 
 	public function save_post( $post_id, $post ) {
-
+		$x = 10;
 	}
 
 	public function trash_post( $post_id ) {

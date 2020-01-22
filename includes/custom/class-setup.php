@@ -8,7 +8,7 @@ use Main\Plugin;
  * Plugin Setup Class. Here everything related to activation and deactivation of the plugin is handled.
  *
  * @package Main\Custom
- * @author Berend de Groot <berend@nugtr.nl>
+ * @author  Berend de Groot <berend@nugtr.nl>
  */
 class Setup {
 	protected $required_plugins;
@@ -20,7 +20,7 @@ class Setup {
 	/**
 	 * Fires then the plugin is activated.
 	 *
-	 * @hook plugin_activation
+	 * @hook   plugin_activation
 	 * @author Berend de Groot <berend@nugtr.nl>
 	 */
 	public function activate() {
@@ -48,7 +48,7 @@ class Setup {
 	/**
 	 * Fires when the plugin is deactivated.
 	 *
-	 * @hook plugin_deactivation
+	 * @hook   plugin_deactivation
 	 * @author Berend de Groot <berend@nugtr.nl>
 	 */
 	public function deactivate() {
