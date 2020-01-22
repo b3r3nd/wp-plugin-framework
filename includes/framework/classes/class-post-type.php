@@ -5,6 +5,7 @@ namespace Main\Framework\Classes;
  * Class Post_Type
  *
  * @package Main\Framework\Entities
+ * @author  Berend de Groot <berend@nugtr.nl>
  */
 class Post_Type {
 	private $post_type;
@@ -25,6 +26,8 @@ class Post_Type {
 	 * @param array  $options
 	 * @param array  $capabilities
 	 * @param array  $supports
+	 *
+	 * @author Berend de Groot <berend@nugtr.nl>
 	 */
 	public function __construct( $post_type = "", $labels = array(), $options = array(), $capabilities = array(), $supports = array() ) {
 		$this->post_type        = $post_type;
@@ -34,21 +37,20 @@ class Post_Type {
 		$this->options          = $options;
 		$this->single_template  = false;
 		$this->archive_template = false;
-		$this->post_object = false;
-		$this->taxonomies = false;
+		$this->post_object      = false;
+		$this->taxonomies       = false;
 	}
 
+	/**
+	 * @return bool
+	 * @author Berend de Groot <berend@nugtr.nl>
+	 */
 	public function has_custom_class() {
-		if(!$this->post_object) {
+		if ( ! $this->post_object ) {
 			return false;
 		}
+
 		return true;
-	}
-	/**
-	 * @param $post_object
-	 */
-	public function set_post_object($post_object) {
-		$this->post_object = $post_object;
 	}
 
 	/**
@@ -57,18 +59,12 @@ class Post_Type {
 	public function get_post_object() {
 		return $this->post_object;
 	}
-	/**
-	 * @param $location
-	 */
-	public function set_single_template( $location ) {
-		$this->single_template = $location;
-	}
 
 	/**
-	 * @param $location
+	 * @param $post_object
 	 */
-	public function set_archive_template( $location ) {
-		$this->archive_template = $location;
+	public function set_post_object( $post_object ) {
+		$this->post_object = $post_object;
 	}
 
 	/**
@@ -79,6 +75,13 @@ class Post_Type {
 	}
 
 	/**
+	 * @param $location
+	 */
+	public function set_single_template( $location ) {
+		$this->single_template = $location;
+	}
+
+	/**
 	 * @return mixed
 	 */
 	public function get_archive_template() {
@@ -86,37 +89,19 @@ class Post_Type {
 	}
 
 	/**
+	 * @param $location
+	 */
+	public function set_archive_template( $location ) {
+		$this->archive_template = $location;
+	}
+
+	/**
 	 * @param $taxonomy String
-	 * @param $args array
+	 * @param $args     array
 	 */
 	public function add_taxonomy( $taxonomy, $args = array() ) {
 		$taxonomyObj        = new Taxonomy( $taxonomy, $this->get_post_type(), $args );
 		$this->taxonomies[] = $taxonomyObj;
-	}
-
-	/**
-	 * @return mixed
-	 */
-	public function get_taxonomies() {
-		return $this->taxonomies;
-	}
-
-	/**
-	 * Used to quickly get all the args for the register_post_type function.
-	 *
-	 * @return array
-	 */
-	public function get_args() {
-		$args = array(
-			'labels'       => $this->labels,
-			'capabilities' => $this->capabilities,
-			'supports'     => $this->supports,
-		);
-		foreach ( $this->options as $option => $value ) {
-			$args[ $option ] = $value;
-		}
-
-		return $args;
 	}
 
 	/**
@@ -131,6 +116,32 @@ class Post_Type {
 	 */
 	public function set_post_type( $post_type = "" ) {
 		$this->post_type = $post_type;
+	}
+
+	/**
+	 * @return mixed
+	 */
+	public function get_taxonomies() {
+		return $this->taxonomies;
+	}
+
+	/**
+	 * Used to quickly get all the args for the register_post_type function.
+	 *
+	 * @return array
+	 * @author Berend de Groot <berend@nugtr.nl>
+	 */
+	public function get_args() {
+		$args = array(
+			'labels'       => $this->labels,
+			'capabilities' => $this->capabilities,
+			'supports'     => $this->supports,
+		);
+		foreach ( $this->options as $option => $value ) {
+			$args[ $option ] = $value;
+		}
+
+		return $args;
 	}
 
 	/**

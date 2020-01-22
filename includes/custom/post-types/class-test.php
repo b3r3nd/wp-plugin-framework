@@ -8,30 +8,31 @@ use Main\Framework\Custom_Post_Interface;
  * Class Test
  *
  * @package Main\Custom\Custom_Post_Types
+ * @author Berend de Groot <berend@nugtr.nl>
  */
 class Test implements Custom_Post_Interface {
 
 	public function __construct() {
+
+	}
+
+	public function save_post( $post_id, $post ) {
 		$x = 10;
 	}
 
-	public function save_post($post_id, $post) {
-		$x = 10;
+	public function trash_post( $post_id ) {
+
 	}
 
-	public function trash_post($post_id) {
-		$x = 10;
+	public function untrash_post( $post_id ) {
+
 	}
 
-	public function untrash_post($post_id) {
-		$x = 10;
+	public function before_delete_post( $post_id ) {
+
 	}
 
-	public function before_delete_post($post_id) {
-		$x = 10;
-	}
+	public function transition_post_status( $new_status, $old_status, $post ) {
 
-	public function transition_post_status($new_status, $old_status, $post) {
-		$x = 10;
 	}
 }
