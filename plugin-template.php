@@ -1,9 +1,9 @@
 <?php
 /**
- * Plugin Name: WordPress Plugin Framework
+ * Plugin Name: NUGTR Plugin Framework
  * Plugin URI: http://www.nugtr.nl
  * Description: Framework to help with plug-in development
- * Version: 1.3.0
+ * Version: 1.2.0
  * Author: Berend de Groot <berend@nugtr.nl>
  */
 

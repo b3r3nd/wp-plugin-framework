@@ -1,15 +1,16 @@
 # WordPress Plugin Framework
+This repo is synced with Berend's private GitLab server every once in a while
+since this is a private project which NUGTR devs are allowed to use.
 
-Read before you ask:
+
+Read before you ask, comments are everywhere in the code and general WordPress
+codex provides you with all info you need.
 
 *  https://codex.wordpress.org/ - Code examples and API
 *  https://developer.wordpress.org/ - Developer tools and API
 *  https://make.wordpress.org/ - Everything about the Core
 
-
 And please.. read the coding standards: https://codex.wordpress.org/WordPress_Coding_Standards
-
-More extensive documentation can be found on our Data disk -> WordPress folder -> Plugin Framework
 
 ### Versions
 
@@ -17,7 +18,8 @@ More extensive documentation can be found on our Data disk -> WordPress folder -
 - 1.0 - Released Oct. 2017
 - 1.1 - Released Feb. 2018
 - 1.2 - Released Apr. 2019 
-- 1.3 - Released Dec 2019 - Current Master
+- 2.0 - Releases Jan. 2020 
+- 3.0 - Planned In March 2020
 
 ### Checklist after git clone
 * Change root folder name to desired plug-in name
